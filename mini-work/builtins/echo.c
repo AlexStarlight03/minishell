@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:16 by adube             #+#    #+#             */
-/*   Updated: 2023/10/11 11:04:08 by adube            ###   ########.fr       */
+/*   Updated: 2023/10/18 14:28:39 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	args_count(char **args)
 {
 	int	i;
-	
+
 	i = 0;
 	while (args[i])
 		i++;
@@ -23,16 +23,16 @@ static int	args_count(char **args)
 }
 int	ft_echo(char **args)
 {
-	int	i;
-	int	n;
+	int		i;
+	bool	newline;
 
-	n = 0;
+	newline = false;
 	i = 1;
-	if (args_count > 1)
+	if (args_count(args) > 1)
 	{
-		if (ft_strncmp(args[1], "-n", 2) == 0)
+		if (args[1][0] == '-' && args[1][1] == 'n' && args[1][2] == '\0')
 		{
-			n = 1;
+			newline = true;
 			i++;
 		}
 		while (args[i])
@@ -42,7 +42,7 @@ int	ft_echo(char **args)
 				write(1, " ", 1);
 		}
 	}
-	if (n == 0)
+	if (newline == false)
 		write(1, "\n", 1);
 	return (0);
 }
