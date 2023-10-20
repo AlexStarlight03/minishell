@@ -64,9 +64,47 @@ int	take_input(char* str)
         return (1);
 }
 
-int	main()
+void	get_envp(t_msh *msh, char **envp)
 {
-	char inputstr[1024];	
+	int	i;
+	int j;
+
+	i = 0;
+	while (envp[i])
+		i++;
+	msh->envp = //malloc 
+	i = 0;
+	j = 0;
+	while(envp[i++])
+	{
+		ft_lstadd_back(msh->envp, (t_list)envp[i]);
+		msh->envp = msh->envp->next;
+	}
+	msh->envp->next = NULL;
+}
+
+t_msh *ft_init_ms(envp)
+{
+	t_msh *msh;
+
+	if (!msh)
+	{
+		msh = ft_calloc(1, sizeof(t_msh));
+		if (!msh)
+			//error-exit function
+		msh->envp = NULL;
+		get_envp(msh, envp);
+	}
+	return (msh);
+}
+
+
+int	main(int argc, char **argv, char **envp)
+{
+	char inputstr[1024];
+	t_msh	*msh;
+
+	msh = ft_init_ms(envp);
 	while (1)
 	{
 		print_prompt();
