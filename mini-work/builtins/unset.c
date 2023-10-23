@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:27 by adube             #+#    #+#             */
-/*   Updated: 2023/10/11 12:10:14 by adube            ###   ########.fr       */
+/*   Updated: 2023/10/23 11:49:56 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,40 +22,38 @@ int		*env_var_cut(char *env)
 	return (i);
 }
 
-void	ft_free_node(t_msh *msh, t_env *env)
-{
-	if (msh->env == env && env->next == NULL)
-	{
-		free(msh->env->content);
-		msh->env->content = NULL;
-		msh->env->next = NULL;
-		return ;
-	}
-	free(env->content);
-	env->content = NULL;
-	free(env);
-	env = NULL;
-	return ;
-}
+//void	ft_free_node(t_msh *msh, t_env *env)
+//{
+//	if (msh->env == env && env->next == NULL)
+//	{
+//		free(msh->env->content);
+//		msh->env->content = NULL;
+//		msh->env->next = NULL;
+//		return ;
+//	}
+//	free(env->content);
+//	env->content = NULL;
+//	free(env);
+//	env = NULL;
+//	return ;
+//}
 
-int		ft_unset(t_msh *msh, char **args)
+int		ft_unset(t_data *data, char **args)
 {
-	t_env *env;
-	t_env *temp;
+	char	*temp;
+	int		i;
 
-	env = msh->env;
+	i = 0;
 	if (!args[1])
 		return (0);
-	while (env && env->next != NULL)
+	while (data->env[i] && data->env[i + 1] != NULL)
 	{
-		if (ft_strncmp(args[1], env->content, env_var_cut(env->content)) == 0)
+		if (ft_strncmp(args[1], data->env[i], env_var_cut(data->env[i])) == 0)
 		{
-			temp = env->next;
-			ft_free_node(msh, env);
-			env = temp;
+			temp = data->env[i + 1];
+			free(data->env[i]);
+			data->env[i] = temp;
 			return (0);
 		}
-		env = env->next;
-			
-	
+		i++;
 }

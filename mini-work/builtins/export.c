@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:13:52 by adube             #+#    #+#             */
-/*   Updated: 2023/10/11 11:06:42 by adube            ###   ########.fr       */
+/*   Updated: 2023/10/23 11:43:26 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_str_in(char *big, char *little)
 }
 
 
-int	ft_export(char **cmd, t_msh *msh)
+int	ft_export(char **cmd, t_data *data)
 {
 	char	*str;
 	int		i;
@@ -45,19 +45,18 @@ int	ft_export(char **cmd, t_msh *msh)
 		return (1);
 	}
 	
-	while(msh->env->next != NULL)
+	while(data->env[i] != NULL)
 	{
-		if (ft_str_in(msh->env->content, cmd[1]) == 0)
-			break ;
-		msh->env = msh->env->next;	
+		if (ft_str_in(data->env[i++], cmd[1]) == 0)
+			break ;	
 	}
-	if (msh->env->next == NULL)
+	if (data->env == NULL)
 	{
-		str = ft_strjoin(cmd[1], value)
+		str = ft_strjoin(cmd[1], value);
 		ft_lstadd_back((t_list)msh->env, (t_list)str);
 		return (0);
 	}
-	while (msh->env->content[i] == cmd[1][i])
+	while (data->env[i] == cmd[1][i])
 		i++;
 	
 }

@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2023/10/11 11:03:19 by adube            ###   ########.fr       */
+/*   Updated: 2023/10/23 11:27:00 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,18 @@
 # include <errno.h>
 # include <signal.h>
 
-typedef struct s_env
-{
-	char			*content;
-	struct s_env	*next;
-}					t_env;
 
-typedef struct	s_msh
+typedef struct s_list
 {
-	t_env			*env;
+	void			*content;
+	struct s_list	*next;
+}				t_list;
+
+typedef struct	s_data
+{
 	int				ret;
 	int				exit;
-}					t_msh;
+	char			**env;
+}					t_data;
 
 #endif

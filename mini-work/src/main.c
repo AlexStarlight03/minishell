@@ -8,37 +8,7 @@
 #include<readline/readline.h>
 #include<readline/history.h>
 
-size_t	ft_strlen(const char *s)
-{
-	int	len;
-
-	len = 0;
-	if (!s)
-		return (0);
-	while (s[len] != '\0')
-		len++;
-	return (len);
-}
-
-
-int	ft_strcpy(char *dest, const char *src)
-{
-	size_t	i;
-
-	i = 0;
-	if (!src || !dest)
-		return (0);
-
-	while (src[i])
-	{
-			dest[i] = src[i];
-			i++;
-	}
-	dest[i] = '\0';
-	while (src[i])
-		i++;
-	return (i);
-}
+#include "../include/minishell.h"
 
 
 void print_prompt()
@@ -48,8 +18,7 @@ void print_prompt()
     printf("%s", cwd);
 }
 
-
-int	take_input(char* str)
+int	take_input(char* str, t_data data)
 {
     char* buf;
   
@@ -58,57 +27,43 @@ int	take_input(char* str)
 	{
         add_history(buf);
         ft_strcpy(str, buf);
+		ft_env(&data);
         return (0);
     } 
 	else 
         return (1);
 }
 
-void	get_envp(t_msh *msh, char **envp)
+char	**ft_init_env(char **envp)
 {
 	int	i;
-	int j;
+	char **ret;
 
+	i = 0;
+	while(envp[i])
+		i++;
+	ret = ft_calloc(sizeof(char *), i + 1);
+	if (!ret)
+		return (NULL);
 	i = 0;
 	while (envp[i])
+	{
+		ret[i] = ft_strdup(envp[i]);
 		i++;
-	msh->envp = //malloc 
-	i = 0;
-	j = 0;
-	while(envp[i++])
-	{
-		ft_lstadd_back(msh->envp, (t_list)envp[i]);
-		msh->envp = msh->envp->next;
 	}
-	msh->envp->next = NULL;
+	return (ret);
 }
-
-t_msh *ft_init_ms(envp)
-{
-	t_msh *msh;
-
-	if (!msh)
-	{
-		msh = ft_calloc(1, sizeof(t_msh));
-		if (!msh)
-			//error-exit function
-		msh->envp = NULL;
-		get_envp(msh, envp);
-	}
-	return (msh);
-}
-
 
 int	main(int argc, char **argv, char **envp)
 {
 	char inputstr[1024];
-	t_msh	*msh;
+	t_data data;
 
-	msh = ft_init_ms(envp);
+	data.env = ft_init_env(envp);
 	while (1)
 	{
 		print_prompt();
-		if (take_input(inputstr))
+		if (take_input(inputstr, data))
 			continue;
 		printf("Here is what you wrote: %s\n", inputstr);
 	}
