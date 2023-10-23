@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:27 by adube             #+#    #+#             */
-/*   Updated: 2023/10/23 11:49:56 by adube            ###   ########.fr       */
+/*   Updated: 2023/10/23 14:39:45 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@ int		*env_var_cut(char *env)
 	while(env[i] && env[i] != '=')
 		i++;
 	return (i);
+}
+
+void	new_env(t_data *data)
+{
+	char	**new_env;
+	size_t	i;
+
+	while(data->env[i])
+		i++;
+	new_env = ft_calloc(i + 1, sizeof(*new_env));
+	i = 0;
+	
 }
 
 //void	ft_free_node(t_msh *msh, t_env *env)
@@ -45,15 +57,14 @@ int		ft_unset(t_data *data, char **args)
 
 	i = 0;
 	if (!args[1])
-		return (0);
+		return (1);
 	while (data->env[i] && data->env[i + 1] != NULL)
 	{
-		if (ft_strncmp(args[1], data->env[i], env_var_cut(data->env[i])) == 0)
+		if (ft_strncmp(args[1], data->env[i], env_var_name(data->env[i])) == 0)
 		{
-			temp = data->env[i + 1];
-			free(data->env[i]);
-			data->env[i] = temp;
+			new_env(data);
 			return (0);
 		}
 		i++;
+	}
 }

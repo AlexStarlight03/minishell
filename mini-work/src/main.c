@@ -27,7 +27,8 @@ int	take_input(char* str, t_data data)
 	{
         add_history(buf);
         ft_strcpy(str, buf);
-		ft_env(&data);
+		if (strncmp(buf, "env", 3) == 0)
+			ft_env(&data);
         return (0);
     } 
 	else 
