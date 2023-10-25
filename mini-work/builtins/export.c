@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:13:52 by adube             #+#    #+#             */
-/*   Updated: 2023/10/25 15:20:54 by adube            ###   ########.fr       */
+/*   Updated: 2023/10/25 15:35:29 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,7 @@ int	ft_export(char **cmd, t_data *data)
 		str = ft_strjoin(var_name, var_value);
 		ft_lstadd_back(data->env, str);
 	}
-	while (data->env[i] == cmd[1][i])
-		i++;
-	
+	//rajouter conditions pour les erreurs
+	return (0);
 }
 
