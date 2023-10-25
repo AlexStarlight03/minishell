@@ -10,29 +10,28 @@
 
 #include "../include/minishell.h"
 
-
 void print_prompt()
 {
-    char cwd[1024];
+	char cwd[1024];
 	getcwd(cwd, sizeof(cwd));
-    printf("%s", cwd);
+	printf("%s", cwd);
 }
 
 int	take_input(char* str, t_data data)
 {
-    char* buf;
-  
-    buf = readline(" % ");
-    if (ft_strlen(buf) != 0) 
+	char* buf;
+
+	buf = readline(" % ");
+	if (ft_strlen(buf) != 0) 
 	{
-        add_history(buf);
-        ft_strcpy(str, buf);
+		add_history(buf);
+		ft_strcpy(str, buf);
 		if (strncmp(buf, "env", 3) == 0)
 			ft_env(&data);
-        return (0);
-    } 
-	else 
-        return (1);
+		return (0);
+	}
+	else
+		return (1);
 }
 
 char	**ft_init_env(char **envp)

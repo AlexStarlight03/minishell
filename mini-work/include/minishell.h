@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2023/10/23 11:27:00 by adube            ###   ########.fr       */
+/*   Updated: 2023/10/25 15:21:52 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@
 # include <errno.h>
 # include <signal.h>
 
-
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }				t_list;
 
+//changer nom = changer everywhere
 typedef struct	s_data
 {
 	int				ret;

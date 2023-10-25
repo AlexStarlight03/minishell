@@ -6,32 +6,50 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:13:52 by adube             #+#    #+#             */
-/*   Updated: 2023/10/23 11:43:26 by adube            ###   ########.fr       */
+/*   Updated: 2023/10/25 15:20:54 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	ft_str_in(char *big, char *little)
+//mettre dans libft -- ajouter return bool
+bool	ft_str_in(char *big, char *little, char limit)
 {
 	int	i;
-	int	y;
 
-	if (!big)
-		return (0);
-	if (*little == '\0')
-		return (1);
-	while (big[i] != '=' && ft_strlen(little))
+	if (big == NULL || little == NULL)
+		return (false);
+	i = 0;
+	while (big[i] != limit && little[i])
 	{
-		i = 0;
-		while (little[i] == big[i] && little[i] != '\0')
+		while (big[i] == little[i] && little[i])
 			i++;
-		if (little[i] == '\0' && big[i] == '=')
-			return (0);
+		if (big[i] == limit && little[i] == '\0')
+			return (true);
 	}
-	return (1);
+	return (false);
 }
 
+char *ft_tab_check(char **tab, char *str, char limit)
+{
+	int	i;
+
+	i = -1;
+	while (tab[++i])
+	{
+		if (ft_str_in(tab[i], str, limit))
+			return (tab[i]);
+	}
+	return (NULL);
+}
+
+bool	ft_lstreplace(t_list *list, void *str)
+{
+	if (list == NULL)
+		return (false);
+	list->content = str;
+	return (0);
+}
 
 int	ft_export(char **cmd, t_data *data)
 {
@@ -39,24 +57,28 @@ int	ft_export(char **cmd, t_data *data)
 	int		i;
 
 	i = 0;
-	if (!cmd[1] || cmd[2])
+	str = NULL;
+	//mettre dans parsing
+	if (cmd[1] == NULL || cmd[2])
 	{
 		ft_putendl_fd("export needs to have 1 argument", 2);
 		return (1);
 	}
-	
-	while(data->env[i] != NULL)
+	//tableau fini par \0 ou pas...
+	str = ft_tab_check(data->env, cmd[1], '=');
+	if (str)
 	{
-		if (ft_str_in(data->env[i++], cmd[1]) == 0)
-			break ;	
+		ft_lstdelone((t_list *)str);
+		ft_lstreplace((t_list *)data->env, &str);
 	}
-	if (data->env == NULL)
+	else (str == NULL)
 	{
-		str = ft_strjoin(cmd[1], value);
-		ft_lstadd_back((t_list)msh->env, (t_list)str);
-		return (0);
+		//nommer les variables comme du monde 
+		str = ft_strjoin(var_name, var_value);
+		ft_lstadd_back(data->env, str);
 	}
 	while (data->env[i] == cmd[1][i])
 		i++;
 	
 }
+
