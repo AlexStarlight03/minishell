@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:27 by adube             #+#    #+#             */
-/*   Updated: 2023/10/27 10:18:05 by adube            ###   ########.fr       */
+/*   Updated: 2023/10/27 11:07:30 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ bool	ft_unset(t_mini *mini, char **cmd)
 	t_env	*temp;
 	t_env	*env;
 
-	
 	env = mini->env;
 	//ne pas oublier parsing
 	str = ft_tab_check(mini->env, cmd[1], '=');

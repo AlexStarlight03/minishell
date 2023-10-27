@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:13:52 by adube             #+#    #+#             */
-/*   Updated: 2023/10/25 15:35:29 by adube            ###   ########.fr       */
+/*   Updated: 2023/10/27 11:09:30 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,35 @@ bool	ft_str_in(char *big, char *little, char limit)
 	return (false);
 }
 
-char *ft_tab_check(char **tab, char *str, char limit)
+int	*ft_tab_check(t_env *env, char *args)
 {
 	int	i;
 
 	i = -1;
-	while (tab[++i])
+	while (env && env->next != NULL)
 	{
-		if (ft_str_in(tab[i], str, limit))
-			return (tab[i]);
+		if (ft_str_in(env->content, str, limit))
+			return (env);
+		env =  env->next;
 	}
+	if (ft_str_in(env->content, str, limit))
+			return (env);
 	return (NULL);
 }
 
-bool	ft_lstreplace(t_list *list, void *str)
+bool	ft_lstreplace(t_env *ptr_env, void *str)
 {
-	if (list == NULL)
+	if (ptr_env == NULL || str == NULL)
 		return (false);
-	list->content = str;
+	ft_memdel(ptr_env->content);
+	ptr_env->content = ft_strdup(str);
 	return (0);
 }
 
-int	ft_export(char **cmd, t_data *data)
+int	ft_export(char **cmd, t_env *env)
 {
 	char	*str;
+	t_env	*ptr;
 	int		i;
 
 	i = 0;
@@ -65,18 +70,17 @@ int	ft_export(char **cmd, t_data *data)
 		return (1);
 	}
 	//tableau fini par \0 ou pas...
-	str = ft_tab_check(data->env, cmd[1], '=');
-	if (str)
-	{
-		ft_lstdelone((t_list *)str);
-		ft_lstreplace((t_list *)data->env, &str);
-	}
-	else (str == NULL)
+	ptr = ft_tab_check(env, cmd[1], '=');
+	if (ptr == NULL)
 	{
 		//nommer les variables comme du monde 
 		str = ft_strjoin(var_name, var_value);
-		ft_lstadd_back(data->env, str);
+		ft_lstadd_back(env, (t_list *)str);
+		return 
 	}
+	str = ptr->content;
+	if (str)
+		ft_lstreplace(ptr, str);
 	//rajouter conditions pour les erreurs
 	return (0);
 }
