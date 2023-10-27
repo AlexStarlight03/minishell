@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2023/10/25 15:21:52 by adube            ###   ########.fr       */
+/*   Updated: 2023/10/27 10:04:16 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,17 @@ typedef struct s_list
 }				t_list;
 
 //changer nom = changer everywhere
-typedef struct	s_data
+typedef struct	s_env
 {
-	int				ret;
-	int				exit;
-	char			**env;
-}					t_data;
+	char			*content;
+	struct s_env	*next;
+}				t_env;
+
+typedef struct s_mini
+{
+	int				fdin;
+	int				fdout;
+	t_env			*env;
+}				t_mini;
 
 #endif
