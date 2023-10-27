@@ -6,7 +6,7 @@
 #    By: adube <adube@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 12:35:03 by adube             #+#    #+#              #
-#    Updated: 2023/10/25 09:23:09 by adube            ###   ########.fr        #
+#    Updated: 2023/10/27 12:07:45 by adube            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ FLAGS		=	-Wall -Wextra -Werror
 RM			=	rm -rf
 
 #FILES AND PATH
-HEADER_SRCS	=	header/minishell.h
+HEADER_SRCS	=	include/minishell.h
 
 MPATH_SRCS	=	src/main.c \
 				builtins/cd.c \
