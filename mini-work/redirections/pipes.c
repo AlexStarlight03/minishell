@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 13:14:24 by adube             #+#    #+#             */
-/*   Updated: 2023/10/30 10:42:56 by adube            ###   ########.fr       */
+/*   Created: 2023/10/30 10:53:13 by adube             #+#    #+#             */
+/*   Updated: 2023/10/30 11:01:59 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
+#include "../include/minishell.h"
 
-int	ft_pwd(void)
+int	pipes_prep(t_mini *mini)
 {
-	char *pwd;
-	// if env && if $PWD
-	pwd = getcwd(pwd, sizeof(char *));
-	if (pwd)
-	{
-		printf("%s\n", pwd);
-		return (0);
-	}
-	return (1);
-}
+	pid_t	pid;
+	int		pipe_fd[2];
 
-//int main(int argc, char **argv)
-//{
-//	ft_pwd();
-//	return (0);
-//}
+	pipe(pipe_fd);
+	pid = fork;
+	if (pid == 0)
+	{
+		close(pipe_fd[1]);
+		dup2(pipe_fd[0], STDIN);
+	}
+	else
+	{
+		close(pipe_fd[0]);
+		dup2(pipe_fd[1], STDOUT);
+		
+	}
+}

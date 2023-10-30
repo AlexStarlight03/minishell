@@ -6,13 +6,23 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:27 by adube             #+#    #+#             */
-/*   Updated: 2023/10/27 11:07:30 by adube            ###   ########.fr       */
+/*   Updated: 2023/10/30 10:39:41 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	free_lstone(t_mini *mini, t_env *env)
+size_t	var_len(char *env)
+{
+	size_t	i;
+
+	i = 0;
+	while(env[i] && env[i] != '=')
+		i++;
+	return(i);
+}
+
+void	free_lst_node(t_mini *mini, t_env *env)
 {
 	if (mini->env == env && env->next != NULL)
 	{
@@ -27,19 +37,21 @@ void	free_lstone(t_mini *mini, t_env *env)
 
 bool	ft_unset(t_mini *mini, char **cmd)
 {
-	char	*str;
 	t_env	*temp;
 	t_env	*env;
 
 	env = mini->env;
 	//ne pas oublier parsing
-	str = ft_tab_check(mini->env, cmd[1], '=');
-	if (str)
-	{	
-		temp = env->next->next;
-		free_lstone(mini, env->next);
-		env->next = temp;
-		return (true);
+	while (env && env->next)
+	{
+		if (ft_strncmp(cmd[1], env->content, var_len(env->content)) == 0)
+		{	
+			temp = env->next;
+			free_lst_none(mini, env);
+			env = temp;
+			return (true);
+		}
+		env = env->next;
 	}
 	return (false);
 }

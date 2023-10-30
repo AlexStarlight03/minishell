@@ -6,52 +6,89 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:13:52 by adube             #+#    #+#             */
-/*   Updated: 2023/10/27 11:09:30 by adube            ###   ########.fr       */
+/*   Updated: 2023/10/30 14:22:23 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-//mettre dans libft -- ajouter return bool
-bool	ft_str_in(char *big, char *little, char limit)
+// //mettre dans libft -- ajouter return bool
+// bool	ft_str_in(char *big, char *little, char limit)
+// {
+// 	int	i;
+
+// 	if (big == NULL || little == NULL)
+// 		return (false);
+// 	i = 0;
+// 	while (big[i] != limit && little[i])
+// 	{
+// 		while (big[i] == little[i] && little[i])
+// 			i++;
+// 		if (big[i] == limit && little[i] == '\0')
+// 			return (true);
+// 	}
+// 	return (false);
+// }
+
+char	*get_var_name(char *dest, char *src)
 {
 	int	i;
 
-	if (big == NULL || little == NULL)
-		return (false);
 	i = 0;
-	while (big[i] != limit && little[i])
+	while(src[i] && src[i] != '=' && ft_strlen(src) < BUFFER_SIZE)
 	{
-		while (big[i] == little[i] && little[i])
-			i++;
-		if (big[i] == limit && little[i] == '\0')
-			return (true);
+		dest[i] = src[i];
+		i++;
 	}
-	return (false);
+	dest[i] = '\0';
+	return(dest);
 }
 
-int	*ft_tab_check(t_env *env, char *args)
+int	check_env(t_env *env, char *args)
 {
-	int	i;
-
-	i = -1;
-	while (env && env->next != NULL)
+	char	var_name[];
+	char	env_name[];
+	
+	get_var_name(var_name, args);
+	while(env && env->next)
 	{
-		if (ft_str_in(env->content, str, limit))
-			return (env);
-		env =  env->next;
+		get_var_name(env_name, env->content);
+		if(ft_strcmp(var_name, env_name) == 0)
+		{
+			ft_memdel(env->content);
+			env->content = ft_strdup(args);
+			return (0);
+		}
+		env = env->next;
 	}
-	if (ft_str_in(env->content, str, limit))
-			return (env);
-	return (NULL);
+	return (1);
 }
 
-bool	ft_lstreplace(t_env *ptr_env, void *str)
+t_env	*ft_lstlast(t_env *lst)
 {
-	if (ptr_env == NULL || str == NULL)
+	if (!lst)
+		return (NULL);
+	while (lst -> next)
+		lst = lst -> next;
+	return (lst);
+}
+
+bool	env_add_back(t_env *env, char *str)
+{
+	t_env	*new;
+	t_env	*last;
+	
+	if (str == NULL)
 		return (false);
-	ft_memdel(ptr_env->content);
-	ptr_env->content = ft_strdup(str);
+	new = (t_env *)str;
+	if (env == NULL)
+	{
+		env = new;
+		return (true);
+	}
+	last = ft_lstlast(env);
+	last->next = new;
+	last->next->next = NULL;
 	return (0);
 }
 
@@ -70,7 +107,7 @@ int	ft_export(char **cmd, t_env *env)
 		return (1);
 	}
 	//tableau fini par \0 ou pas...
-	ptr = ft_tab_check(env, cmd[1], '=');
+	check_env(env, cmd[1]);
 	if (ptr == NULL)
 	{
 		//nommer les variables comme du monde 
