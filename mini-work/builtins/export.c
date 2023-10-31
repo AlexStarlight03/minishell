@@ -6,29 +6,11 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:13:52 by adube             #+#    #+#             */
-/*   Updated: 2023/10/31 12:06:48 by adube            ###   ########.fr       */
+/*   Updated: 2023/10/31 14:43:56 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-// //mettre dans libft -- ajouter return bool
-// bool	ft_str_in(char *big, char *little, char limit)
-// {
-// 	int	i;
-
-// 	if (big == NULL || little == NULL)
-// 		return (false);
-// 	i = 0;
-// 	while (big[i] != limit && little[i])
-// 	{
-// 		while (big[i] == little[i] && little[i])
-// 			i++;
-// 		if (big[i] == limit && little[i] == '\0')
-// 			return (true);
-// 	}
-// 	return (false);
-// }
 
 char	*get_var_name(char *dest, char *src)
 {
@@ -89,7 +71,7 @@ bool	env_add_back(t_env *env, char *str)
 	last = ft_lstlast(env);
 	last->next = new;
 	last->next->next = NULL;
-	return (0);
+	return (true);
 }
 
 int	ft_export(char **cmd, t_env *env)
@@ -106,19 +88,9 @@ int	ft_export(char **cmd, t_env *env)
 		ft_putendl_fd("export needs to have 1 argument", 2);
 		return (1);
 	}
-	//tableau fini par \0 ou pas...
-	check_env(env, cmd[1]);
-	if (ptr == NULL)
-	{
-		//nommer les variables comme du monde 
-		str = ft_strjoin(var_name, var_value);
-		ft_lstadd_back(env, (t_list *)str);
-		return 
-	}
-	str = ptr->content;
-	if (str)
-		ft_lstreplace(ptr, str);
-	//rajouter conditions pour les erreurs
-	return (0);
+	if (check_env(env, cmd[1]) == 0)
+		return (0);
+	else if (env_add_back(env, cmd[1]) == true)
+			return (0);
+	return (1);
 }
-

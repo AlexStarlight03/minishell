@@ -6,12 +6,14 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2023/10/31 13:53:26 by adube            ###   ########.fr       */
+/*   Updated: 2023/10/31 14:34:48 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# define BUFFER_SIZE 65535
 
 #include "libft.h"
 #include <stdlib.h>

@@ -6,12 +6,11 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:24 by adube             #+#    #+#             */
-/*   Updated: 2023/10/30 10:42:56 by adube            ###   ########.fr       */
+/*   Updated: 2023/10/31 14:43:43 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
+#include "../include/minishell.h"
 
 int	ft_pwd(void)
 {
@@ -25,9 +24,3 @@ int	ft_pwd(void)
 	}
 	return (1);
 }
-
-//int main(int argc, char **argv)
-//{
-//	ft_pwd();
-//	return (0);
-//}

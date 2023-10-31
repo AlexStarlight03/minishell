@@ -6,15 +6,15 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:13:57 by adube             #+#    #+#             */
-/*   Updated: 2023/10/27 11:02:48 by adube            ###   ########.fr       */
+/*   Updated: 2023/10/31 14:01:20 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_exit(t_mini mini)
+void	ft_exit(t_mini *mini, t_env *env)
 {
 	//ad exit conditions/ error messages
-	ft_lstclear((t_list **)mini->env);
+	free_lst_node(mini, env);
 	//exit (0);
 }

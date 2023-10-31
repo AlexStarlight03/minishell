@@ -6,16 +6,11 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:16 by adube             #+#    #+#             */
-/*   Updated: 2023/10/25 12:56:50 by adube            ###   ########.fr       */
+/*   Updated: 2023/10/31 13:58:30 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../include/minishell.h"
-
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdbool.h>
+#include "../include/minishell.h"
 
 int	ft_strlen(const char *s)
 {

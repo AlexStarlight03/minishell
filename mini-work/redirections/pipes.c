@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 10:53:13 by adube             #+#    #+#             */
-/*   Updated: 2023/10/30 11:01:59 by adube            ###   ########.fr       */
+/*   Updated: 2023/10/31 14:04:21 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,11 @@ int	pipes_prep(t_mini *mini)
 	if (pid == 0)
 	{
 		close(pipe_fd[1]);
-		dup2(pipe_fd[0], STDIN);
+		dup2(pipe_fd[0], stdin);
 	}
 	else
 	{
 		close(pipe_fd[0]);
-		dup2(pipe_fd[1], STDOUT);
-		
+		dup2(pipe_fd[1], stdout);
 	}
 }
