@@ -6,7 +6,7 @@
 #    By: adube <adube@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 12:35:03 by adube             #+#    #+#              #
-#    Updated: 2023/10/27 12:07:45 by adube            ###   ########.fr        #
+#    Updated: 2023/10/31 12:12:27 by adube            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ MPATH_SRCS	=	src/main.c \
 				builtins/export.c \
 				builtins/pwd.c \
 				builtins/unset.c \
+				redirections/pipes.c
 OBJ_M		=	$(MPATH_SRCS:.c=.o)
 
 LIBFT := ./lib/libft
