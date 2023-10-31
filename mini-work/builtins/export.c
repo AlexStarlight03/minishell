@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:13:52 by adube             #+#    #+#             */
-/*   Updated: 2023/10/30 14:22:23 by adube            ###   ########.fr       */
+/*   Updated: 2023/10/31 12:06:48 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ char	*get_var_name(char *dest, char *src)
 
 int	check_env(t_env *env, char *args)
 {
-	char	var_name[];
-	char	env_name[];
+	char	var_name[1024];
+	char	env_name[1024];
 	
 	get_var_name(var_name, args);
 	while(env && env->next)

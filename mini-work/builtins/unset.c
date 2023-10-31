@@ -6,13 +6,13 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:27 by adube             #+#    #+#             */
-/*   Updated: 2023/10/30 10:39:41 by adube            ###   ########.fr       */
+/*   Updated: 2023/10/31 12:07:39 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-size_t	var_len(char *env)
+size_t	name_len(char *env)
 {
 	size_t	i;
 
@@ -44,7 +44,7 @@ bool	ft_unset(t_mini *mini, char **cmd)
 	//ne pas oublier parsing
 	while (env && env->next)
 	{
-		if (ft_strncmp(cmd[1], env->content, var_len(env->content)) == 0)
+		if (ft_strncmp(cmd[1], env->content, name_len(env->content)) == 0)
 		{	
 			temp = env->next;
 			free_lst_none(mini, env);
