@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:12 by adube             #+#    #+#             */
-/*   Updated: 2023/10/31 12:06:25 by adube            ###   ########.fr       */
+/*   Updated: 2023/10/31 13:52:40 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 char	*get_path(t_env *env, char *var_name, int len)
 {
-	char	env_name[];
+	char	env_name[1024];
 	char 	*path;
 	int		i;
 	
@@ -36,7 +36,7 @@ char	*get_path(t_env *env, char *var_name, int len)
 
 void	change_oldpwd(t_env *env)
 {
-	char	cwd(1024);
+	char	cwd[1024];
 	char	*oldpwd;
 
 	getcwd(cwd, 1024);
@@ -77,6 +77,7 @@ int	cd(t_env *env, char **args)
 		change_oldpwd(env);
 		ret = chdir(args[1]);
 		if ( ret != 0)
+			return (1);
 			//error function;
 	}
 	return (ret);	

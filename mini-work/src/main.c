@@ -1,25 +1,28 @@
-
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
-#include<unistd.h>
-#include<sys/types.h>
-#include<sys/wait.h>
-#include<readline/readline.h>
-#include<readline/history.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/31 13:02:17 by adube             #+#    #+#             */
+/*   Updated: 2023/10/31 13:04:16 by adube            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 void print_prompt()
 {
-	char cwd[1024];
+	char	cwd[1024];
+	
 	getcwd(cwd, sizeof(cwd));
 	printf("%s", cwd);
 }
 
 int	take_input(char* str, t_mini mini)
 {
-	char* buf;
+	char*	buf;
 
 	buf = readline(" % ");
 	if (ft_strlen(buf) != 0) 
@@ -34,8 +37,9 @@ int	take_input(char* str, t_mini mini)
 
 int	ft_init_env(t_mini *mini, char **envp)
 {
-	t_env *env;
-	t_env *new;
+	t_env 	*env;
+	t_env 	*new;
+	int		i;
 
 	env = malloc(sizeof(t_env));
 	if (env == NULL)
@@ -62,7 +66,7 @@ int	ft_init_env(t_mini *mini, char **envp)
 
 int	main(int argc, char **argv, char **envp)
 {
-	char inputstr[1024];
+	char	inputstr[1024];
 	t_mini	mini;
 	
 	ft_init_env(&mini, envp);
