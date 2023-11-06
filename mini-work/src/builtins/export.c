@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:13:52 by adube             #+#    #+#             */
-/*   Updated: 2023/11/06 11:26:25 by adube            ###   ########.fr       */
+/*   Updated: 2023/11/06 13:29:44 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ bool	env_add_back(t_env *env, char *str)
 	
 	if (str == NULL)
 		return (false);
-	new = (t_env *)str;
+	new = malloc(sizeof(t_env));
+	if (!new)
+		return (false);
+	new->content = ft_strdup(str);
 	if (env == NULL)
 	{
 		env = new;

@@ -6,11 +6,13 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:16 by adube             #+#    #+#             */
-/*   Updated: 2023/11/06 11:26:27 by adube            ###   ########.fr       */
+/*   Updated: 2023/11/06 13:30:19 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+//gerer dans le parsing les quote et double quotes!!!
 
 static int	args_count(char **args)
 {
