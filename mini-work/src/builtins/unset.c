@@ -6,11 +6,11 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:27 by adube             #+#    #+#             */
-/*   Updated: 2023/10/31 15:14:54 by adube            ###   ########.fr       */
+/*   Updated: 2023/11/06 12:43:10 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 size_t	name_len(char *env)
 {
@@ -44,14 +44,13 @@ bool	ft_unset(t_mini *mini, char **cmd)
 	//ne pas oublier parsing
 	while (env && env->next)
 	{
-		if (ft_strncmp(cmd[1], env->content, name_len(env->content)) == 0)
+		if (ft_strncmp(cmd[1], env->next->content, name_len(env->next->content)) == 0)
 		{	
-			temp = env->next;
-			free_lst_none(mini, env);
-			env = temp;
-			return (true);
+			temp = env->next->next;
+			free_lst_node(mini, env->next);
+			env->next = temp;
 		}
 		env = env->next;
 	}
-	return (false);
+	return (true);
 }

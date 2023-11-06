@@ -6,11 +6,11 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:13:52 by adube             #+#    #+#             */
-/*   Updated: 2023/10/31 15:14:56 by adube            ###   ########.fr       */
+/*   Updated: 2023/11/06 11:26:25 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 char	*get_var_name(char *dest, char *src)
 {
@@ -46,7 +46,7 @@ int	check_env(t_env *env, char *args)
 	return (1);
 }
 
-t_env	*ft_lstlast(t_env *lst)
+t_env	*lstlast(t_env *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -68,7 +68,7 @@ bool	env_add_back(t_env *env, char *str)
 		env = new;
 		return (true);
 	}
-	last = ft_lstlast(env);
+	last = lstlast(env);
 	last->next = new;
 	last->next->next = NULL;
 	return (true);
@@ -76,12 +76,6 @@ bool	env_add_back(t_env *env, char *str)
 
 int	ft_export(char **cmd, t_env *env)
 {
-	char	*str;
-	t_env	*ptr;
-	int		i;
-
-	i = 0;
-	str = NULL;
 	//mettre dans parsing
 	if (cmd[1] == NULL || cmd[2])
 	{

@@ -6,11 +6,11 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:12 by adube             #+#    #+#             */
-/*   Updated: 2023/10/31 15:14:59 by adube            ###   ########.fr       */
+/*   Updated: 2023/11/06 12:44:13 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 char	*get_path(t_env *env, char *var_name, int len)
 {
@@ -19,6 +19,7 @@ char	*get_path(t_env *env, char *var_name, int len)
 	int		i;
 	
 	i = 0;
+	path = NULL;
 	while(env && env->next)
 	{
 		get_var_name(env_name, env->content);
@@ -30,7 +31,7 @@ char	*get_path(t_env *env, char *var_name, int len)
 		}
 		env = env->next;
 	}
-	return (1);
+	return (NULL);
 }
 
 void	change_oldpwd(t_env *env)
@@ -52,10 +53,12 @@ int	path_move(int dest, t_env *env)
 
 	env_path = NULL;
 	change_oldpwd(env);
+	ret = dest;
 	env_path = get_path(env, "HOME=", 5);
 	if (!env_path)
 	{
 		//error mess and return error
+		return (1);
 	}
 	ret = chdir(env_path);
 	ft_memdel(env_path);
@@ -75,7 +78,7 @@ int	cd(t_env *env, char **args)
 	{
 		change_oldpwd(env);
 		ret = chdir(args[1]);
-		if ( ret != 0)
+		if (ret != 0)
 			return (1);
 			//error function;
 	}

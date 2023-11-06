@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 13:14:19 by adube             #+#    #+#             */
-/*   Updated: 2023/10/31 15:14:58 by adube            ###   ########.fr       */
+/*   Created: 2023/10/30 10:53:13 by adube             #+#    #+#             */
+/*   Updated: 2023/11/06 11:26:19 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+// #include "../../include/minishell.h"
 
-int	ft_env(t_env *env)
-{
-	while (env && env->next != NULL)
-	{
-			ft_putendl_fd(env->content, 1);
-			env = env->next;
-	}
-	if (env)
-			ft_putendl_fd(env->content, 1);
-	return (0);
-}
+// int	pipes_prep(t_mini *mini)
+// {
+// 	pid_t	pid;
+// 	int		pipe_fd[2];
+
+// 	pipe(pipe_fd);
+// 	pid = fork;
+// 	if (pid == 0)
+// 	{
+// 		close(pipe_fd[1]);
+// 		dup2(pipe_fd[0], stdin);
+// 	}
+// 	else
+// 	{
+// 		close(pipe_fd[0]);
+// 		dup2(pipe_fd[1], stdout);
+// 	}
+// }

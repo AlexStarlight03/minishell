@@ -6,30 +6,11 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:16 by adube             #+#    #+#             */
-/*   Updated: 2023/10/31 15:14:59 by adube            ###   ########.fr       */
+/*   Updated: 2023/11/06 11:26:27 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-
-int	ft_strlen(const char *s)
-{
-	int	len;
-
-	len = 0;
-	if (!s)
-		return (0);
-	while (s[len] != '\0')
-		len++;
-	return (len);
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	if (!s)
-		return ;
-	write(fd, s, ft_strlen(s));
-}
+#include "../../include/minishell.h"
 
 static int	args_count(char **args)
 {
@@ -67,7 +48,3 @@ void	ft_echo(char **args)
 		write(1, "\n", 1);
 }
 
-int	main (int argc, char **argv)
-{
-	ft_echo(argv);
-}

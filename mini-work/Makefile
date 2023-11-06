@@ -6,21 +6,19 @@
 #    By: adube <adube@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 12:35:03 by adube             #+#    #+#              #
-#    Updated: 2023/10/31 12:12:27 by adube            ###   ########.fr        #
+#    Updated: 2023/11/06 12:21:07 by adube            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 #SETUP
-NAME		=	pipex
-CC			=	gcc -lreadline
+NAME		=	minishell
+CC			=	gcc
 FLAGS		=	-Wall -Wextra -Werror
 RM			=	rm -rf
 
-#FILES AND PATH
-HEADER_SRCS	=	include/minishell.h
-
-MPATH_SRCS	=	src/main.c \
+SRCS_DIR	=	./src/
+SRCS_LST	=	main.c \
 				builtins/cd.c \
 				builtins/echo.c \
 				builtins/env.c \
@@ -28,45 +26,67 @@ MPATH_SRCS	=	src/main.c \
 				builtins/export.c \
 				builtins/pwd.c \
 				builtins/unset.c \
-				redirections/pipes.c
-OBJ_M		=	$(MPATH_SRCS:.c=.o)
+				redirections/pipes.c \
+				parsing/parse_builtins.c \
+				parsing/parse.c
+SRCS		=	$(addprefix $(SRCS_DIR), $(SRCS_LST))
 
-LIBFT := ./lib/libft
-LIBFT_AR := $(LIBFT)/libft.a
+#FILES AND PATH
+HEADER_DIR	=	./include/
+HEADER_LST	=	minishell.h
+HEADER	 	=	$(addprefix $(HEADER_DIR), $(HEADER_LST))
+
+LIBFT_DIR	=	./lib/libft/
+LIBFT		=	$(LIBFT_DIR)libft.a
+LIBFT_H		=	$(LIBFT_DIR)libft.h
 
 LIBRLINE 		= readline-8.2
 LIBRLINE_DIR	= ./lib/readline/
 RLINE			= $(LIBRLINE_DIR)libreadline.a
 
+OBJS_DIR	=	./obj/
+OBJS_LST	=	$(patsubst %.c, %.o, $(SRCS_LST))
+OBJS		=	$(addprefix $(OBJS_DIR), $(OBJS_LST))
+
+
 #COMMANDS
-%.o: %.c $(HEADER) Makefile
-				@${CC} ${FLAGS} -c $< -o $@
+all : dir readline $(NAME)
 
-$(NAME):		$(OBJ_M)
-				@$(CC) $(OBJ_M) -o $(NAME)
-				@echo -e "$(GREEN)$(NAME) created!$(DEFAULT)"
+$(NAME) : 	$(OBJS)
+			@make -C $(LIBFT_DIR)
+			@$(CC) $(FLAGS) $(SRCS) $(LIBFT) $(RLINE) -lncurses -o $(NAME)
 
-all:			$(NAME)
+$(OBJS_DIR)%.o : $(SRCS_DIR)%.c $(HEADER)
+				@$(CC) $(FLAGS) -c $< -o $@
 
-bonus:			$(OBJ_B)
-				@$(CC) $(OBJ_B) -o $(NAME)
-				@echo -e "$(GREEN)$(NAME) created!$(DEFAULT)"
+run: 	all
+		@./$(NAME)
+
+dir :
+		@mkdir -p $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)redirections $(OBJS_DIR)builtins
+		@mkdir -p $(LIBRLINE_DIR)
+
+readline :
+		@if [ ! -f ./lib/readline/libreadline.a ]; then \
+		curl -O https://ftp.gnu.org/gnu/readline/$(LIBRLINE).tar.gz; \
+		tar -xf $(LIBRLINE).tar.gz; \
+		rm -rf $(LIBRLINE).tar.gz; \
+		cd $(LIBRLINE) && bash configure && make; \
+		mv ./libreadline.a ../lib/readline; \
+		rm -rf ../$(LIBRLINE); \
+		echo "----------------------- Readline succesfully configured ✅ -----------------------\n"; \
+	fi
 
 clean:
-				@$(RM) $(OBJ_M)
-				@$(RM) $(OBJ_B)
-				@echo -e "$(YELLOW)object files deleted!$(DEFAULT)"
+				@make -C $(LIBFT_DIR) clean
+				@$(RM) $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)redirections $(OBJS_DIR)builtins
+				@echo -e "object deleted!"
 
 fclean:			clean
 				@$(RM) $(NAME)
-				@echo -e "$(RED)all deleted!$(DEFAULT)"
+				@$(RM) $(LIBRLINE_DIR)
+				@echo -e "everything clean!"
 
-re:				fclean all
+re:				clean all
 
 .PHONY:		all clean fclean bonus re
-
-#COLORS
-RED = \033[1;31m
-GREEN = \033[1;32m
-YELLOW = \033[1;33m
-DEFAULT = \033[0m

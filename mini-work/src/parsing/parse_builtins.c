@@ -6,11 +6,11 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:31:00 by adube             #+#    #+#             */
-/*   Updated: 2023/10/31 15:14:52 by adube            ###   ########.fr       */
+/*   Updated: 2023/11/06 11:26:20 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 int	is_a_builtin(char **args)
 {
@@ -18,7 +18,7 @@ int	is_a_builtin(char **args)
 	
 	i = 0;
 	while (args[0][i++] != '\0')
-		ft_tolower(&args[0][i]);
+		ft_tolower((int)&args[0][i]);
 	if (ft_strncmp("cd", args[0], 2) == 0)
 		return (CD);
 	if (ft_strncmp("echo", args[0], 4) == 0)

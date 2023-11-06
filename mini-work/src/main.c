@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:02:17 by adube             #+#    #+#             */
-/*   Updated: 2023/10/31 15:14:49 by adube            ###   ########.fr       */
+/*   Updated: 2023/11/06 12:27:46 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,28 @@ void print_prompt()
 	printf("%s", cwd);
 }
 
-int	take_input(char* str, t_mini mini)
+int	take_input(char* str, t_mini *mini)
 {
-	char*	buf;
-
+	char	*buf;
+	char	**args;
+	t_env	*env;
+	
+	env = mini->env;
 	buf = readline(" % ");
 	if (ft_strlen(buf) != 0) 
 	{
 		add_history(buf);
 		ft_strcpy(str, buf);
+		args = ft_split(str, ' ');
+		//tokenize the str into tken (tableaux pour envoyer aux commandes)
+		ft_parse(args, env, mini);
 		return (0);
 	}
 	else
 		return (1);
 }
 
-int	ft_init_env(t_mini *mini, char **envp)
+t_env	*ft_init_env(t_mini *mini, char **envp)
 {
 	t_env 	*env;
 	t_env 	*new;
@@ -43,9 +49,9 @@ int	ft_init_env(t_mini *mini, char **envp)
 
 	env = malloc(sizeof(t_env));
 	if (env == NULL)
-		return (1);
+		return (NULL);
 	if (envp[0] == NULL)
-		return (1);
+		return (NULL);
 	env->content = ft_strdup(envp[0]);
 	env->next = NULL;
 	mini->env = env;
@@ -54,28 +60,35 @@ int	ft_init_env(t_mini *mini, char **envp)
 	{
 		new = malloc(sizeof(t_env));
 		if (new == NULL)
-			return (1);
+			return (NULL);
 			new->content = ft_strdup(envp[i]);
 			new->next = NULL;
 			env->next = new;
 			env = new;
 			i++;
 	}
-	return (0);
+	return (env);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	char	inputstr[1024];
 	t_mini	mini;
+	t_env	*env;
 	
-	ft_init_env(&mini, envp);
+	(void)argv;
+	if (argc != 1)
+	{
+		//error_function;
+		exit(127);
+	}
+	env = ft_init_env(&mini, envp);
 	while (1)
 	{
 		print_prompt();
-		if (take_input(inputstr, mini))
+		if (take_input(inputstr, &mini))
 			continue;
-		printf("Here is what you wrote: %s\n", inputstr);
+		//printf("Here is what you wrote: %s\n", inputstr);
 	}
 	return (0);
 }
