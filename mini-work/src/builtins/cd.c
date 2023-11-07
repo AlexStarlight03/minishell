@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:12 by adube             #+#    #+#             */
-/*   Updated: 2023/11/06 12:44:13 by adube            ###   ########.fr       */
+/*   Updated: 2023/11/07 14:00:49 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 char	*get_path(t_env *env, char *var_name, int len)
 {
 	char	env_name[1024];
-	char 	*path;
+	char	*path;
 	int		i;
-	
+
 	i = 0;
 	path = NULL;
-	while(env && env->next)
+	while (env && env->next)
 	{
 		get_var_name(env_name, env->content);
-		if(ft_strcmp(var_name, env_name) == 0)
+		if (ft_strcmp(var_name, env_name) == 0)
 		{
 			while (env->content[len] != '\0')
 				path[i++] = env->content[len++];
@@ -68,8 +68,8 @@ int	path_move(int dest, t_env *env)
 int	cd(t_env *env, char **args)
 {
 	int	ret;
-	
-	if(!args[1])
+
+	if (!args[1])
 	{
 		ret = path_move(0, env);
 		return (ret);
@@ -82,5 +82,5 @@ int	cd(t_env *env, char **args)
 			return (1);
 			//error function;
 	}
-	return (ret);	
+	return (ret);
 }

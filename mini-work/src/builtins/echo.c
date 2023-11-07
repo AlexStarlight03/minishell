@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:16 by adube             #+#    #+#             */
-/*   Updated: 2023/11/06 13:30:19 by adube            ###   ########.fr       */
+/*   Updated: 2023/11/07 13:58:23 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int	args_count(char **args)
 		i++;
 	return (i);
 }
+
 void	ft_echo(char **args)
 {
 	int		i;
@@ -49,4 +50,3 @@ void	ft_echo(char **args)
 	if (newline == true)
 		write(1, "\n", 1);
 }
-

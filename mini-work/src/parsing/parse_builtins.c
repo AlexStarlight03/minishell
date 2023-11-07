@@ -6,22 +6,39 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:31:00 by adube             #+#    #+#             */
-/*   Updated: 2023/11/07 11:44:09 by adube            ###   ########.fr       */
+/*   Updated: 2023/11/07 13:53:45 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <ctype.h>
+
+void	exec_builtin(t_mini *mini, t_env *env, char **args, int cmd)
+{
+	if (cmd == CD)
+		cd(env, args);
+	if (cmd == ECHO)
+		ft_echo(args);
+	if (cmd == ENV)
+		ft_env(env);
+	if (cmd == EXIT)
+		ft_exit(mini, env);
+	if (cmd == EXPORT)
+		ft_export(args, env);
+	if (cmd == UNSET)
+		ft_unset(mini, args);
+	if (cmd == PWD)
+		ft_pwd();
+}
 
 char	*make_lower(char *arg)
 {
-	char *newstr;
-	char new;
-	int i;
+	char	*newstr;
+	char	new;
+	int		i;
 
 	i = 0;
 	newstr = malloc(sizeof(char *));
-	while(arg[i] != '\0')
+	while (arg[i] != '\0')
 	{
 		new = ft_tolower(arg[i]);
 		newstr[i++] = new;

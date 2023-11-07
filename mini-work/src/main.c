@@ -6,26 +6,27 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:02:17 by adube             #+#    #+#             */
-/*   Updated: 2023/11/06 12:27:46 by adube            ###   ########.fr       */
+/*   Updated: 2023/11/07 13:51:15 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void print_prompt()
+//changer le prompt pour celui de notre choix!
+void	print_prompt(void)
 {
 	char	cwd[1024];
-	
+
 	getcwd(cwd, sizeof(cwd));
 	printf("%s", cwd);
 }
 
-int	take_input(char* str, t_mini *mini)
+int	take_input(char *str, t_mini *mini)
 {
 	char	*buf;
 	char	**args;
 	t_env	*env;
-	
+
 	env = mini->env;
 	buf = readline(" % ");
 	if (ft_strlen(buf) != 0) 
@@ -33,7 +34,7 @@ int	take_input(char* str, t_mini *mini)
 		add_history(buf);
 		ft_strcpy(str, buf);
 		args = ft_split(str, ' ');
-		//tokenize the str into tken (tableaux pour envoyer aux commandes)
+		//tokenize the str into tken (tableaux pour envoyer aux commandes), split seulement pour tester cmds
 		ft_parse(args, env, mini);
 		return (0);
 	}
@@ -43,8 +44,8 @@ int	take_input(char* str, t_mini *mini)
 
 t_env	*ft_init_env(t_mini *mini, char **envp)
 {
-	t_env 	*env;
-	t_env 	*new;
+	t_env	*env;
+	t_env	*new;
 	int		i;
 
 	env = malloc(sizeof(t_env));
@@ -61,11 +62,11 @@ t_env	*ft_init_env(t_mini *mini, char **envp)
 		new = malloc(sizeof(t_env));
 		if (new == NULL)
 			return (NULL);
-			new->content = ft_strdup(envp[i]);
-			new->next = NULL;
-			env->next = new;
-			env = new;
-			i++;
+		new->content = ft_strdup(envp[i]);
+		new->next = NULL;
+		env->next = new;
+		env = new;
+		i++;
 	}
 	return (env);
 }
@@ -75,7 +76,7 @@ int	main(int argc, char **argv, char **envp)
 	char	inputstr[1024];
 	t_mini	mini;
 	t_env	*env;
-	
+
 	(void)argv;
 	if (argc != 1)
 	{
@@ -87,7 +88,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		print_prompt();
 		if (take_input(inputstr, &mini))
-			continue;
+			continue ;
 		//printf("Here is what you wrote: %s\n", inputstr);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:27 by adube             #+#    #+#             */
-/*   Updated: 2023/11/06 12:43:10 by adube            ###   ########.fr       */
+/*   Updated: 2023/11/07 14:01:01 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ size_t	name_len(char *env)
 	size_t	i;
 
 	i = 0;
-	while(env[i] && env[i] != '=')
+	while (env[i] && env[i] != '=')
 		i++;
-	return(i);
+	return (i);
 }
 
 void	free_lst_node(t_mini *mini, t_env *env)
@@ -44,8 +44,9 @@ bool	ft_unset(t_mini *mini, char **cmd)
 	//ne pas oublier parsing
 	while (env && env->next)
 	{
-		if (ft_strncmp(cmd[1], env->next->content, name_len(env->next->content)) == 0)
-		{	
+		if (ft_strncmp(cmd[1], env->next->content, \
+						name_len(env->next->content)) == 0)
+		{
 			temp = env->next->next;
 			free_lst_node(mini, env->next);
 			env->next = temp;

@@ -6,7 +6,7 @@
 #    By: adube <adube@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 12:35:03 by adube             #+#    #+#              #
-#    Updated: 2023/11/06 12:21:07 by adube            ###   ########.fr        #
+#    Updated: 2023/11/07 14:07:12 by adube            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,6 +84,7 @@ clean:
 
 fclean:			clean
 				@$(RM) $(NAME)
+				@make -C $(LIBFT_DIR) fclean
 				@$(RM) $(LIBRLINE_DIR)
 				@echo -e "everything clean!"
 
