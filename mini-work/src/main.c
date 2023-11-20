@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:02:17 by adube             #+#    #+#             */
-/*   Updated: 2023/11/07 13:51:15 by adube            ###   ########.fr       */
+/*   Updated: 2023/11/20 11:20:05 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@ int	take_input(char *str, t_mini *mini)
 	{
 		add_history(buf);
 		ft_strcpy(str, buf);
-		args = ft_split(str, ' ');
 		//tokenize the str into tken (tableaux pour envoyer aux commandes), split seulement pour tester cmds
-		ft_parse(args, env, mini);
+		ft_parse(str, env, mini);
 		return (0);
 	}
 	else

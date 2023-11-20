@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2023/11/20 10:35:27 by adube            ###   ########.fr       */
+/*   Updated: 2023/11/20 13:22:36 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,22 @@
 # define PWD 15
 # define UNSET 16
 
+typedef enum e_toktype
+{
+	TOK_ERROR,
+	TOK_WORD,
+	TOK_SPACE,
+	TOK_DIGIT,
+	TOK_OPERATOR,
+	TOK_REDIRECTION,
+}	t_toktype;
+
+typedef struct s_tokens
+{
+	t_toktype	token;
+	char		*data;
+}				t_tokens;
+
 typedef struct s_env
 {
 	char			*content;
@@ -70,7 +86,7 @@ void	free_lst_node(t_mini *mini, t_env *env);
 
 /* Parsing */
 int		is_a_builtin(char **args);
-void	ft_parse(char **args, t_env *env, t_mini *mini);
+void	ft_parse(char *input, t_env *env, t_mini *mini);
 void	exec_builtin(t_mini *mini, t_env *env, char **args, int cmd);
 
 /* Redirections */
