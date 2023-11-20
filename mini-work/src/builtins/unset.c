@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:27 by adube             #+#    #+#             */
-/*   Updated: 2023/11/07 14:01:01 by adube            ###   ########.fr       */
+/*   Updated: 2023/11/20 09:50:39 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,24 @@ bool	ft_unset(t_mini *mini, char **cmd)
 {
 	t_env	*temp;
 	t_env	*env;
-
-	env = mini->env;
-	//ne pas oublier parsing
-	while (env && env->next)
+	int		i;
+	
+	i = 0;
+	while (cmd[++i])
 	{
-		if (ft_strncmp(cmd[1], env->next->content, \
-						name_len(env->next->content)) == 0)
+		env = mini->env;
+		while (env && env->next)
 		{
-			temp = env->next->next;
-			free_lst_node(mini, env->next);
-			env->next = temp;
+			if (ft_strncmp(cmd[i], env->next->content, \
+							name_len(env->next->content)) == 0)
+			{
+				temp = env->next->next;
+				free_lst_node(mini, env->next);
+				env->next = temp;
+			}
+			env = env->next;
 		}
-		env = env->next;
+
 	}
 	return (true);
 }

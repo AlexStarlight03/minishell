@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:13:52 by adube             #+#    #+#             */
-/*   Updated: 2023/11/07 13:59:22 by adube            ###   ########.fr       */
+/*   Updated: 2023/11/20 10:56:47 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,20 @@ bool	env_add_back(t_env *env, char *str)
 
 int	ft_export(char **cmd, t_env *env)
 {
-	//mettre dans parsing
-	if (cmd[1] == NULL || cmd[2])
+	int		i;
+	t_env 	*temp;
+	int		flag;
+	
+	i = 0;
+	while (cmd[++i])
 	{
-		ft_putendl_fd("export needs to have 1 argument", 2);
-		return (1);
+		flag = 0;
+		temp = env;
+		if (check_env(temp, cmd[i]) == 0)
+ 			flag = 1;
+ 		else if (flag != 1)
+ 			env_add_back(temp, cmd[i]);
+		env = temp;
 	}
-	if (check_env(env, cmd[1]) == 0)
-		return (0);
-	else if (env_add_back(env, cmd[1]) == true)
-		return (0);
-	return (1);
+	return (0);
 }
