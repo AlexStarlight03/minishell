@@ -6,29 +6,24 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:02:17 by adube             #+#    #+#             */
-/*   Updated: 2024/01/18 13:14:43 by adube            ###   ########.fr       */
+/*   Updated: 2024/01/18 17:25:26 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-//changer le prompt pour celui de notre choix!
-void	print_prompt(void)
-{
-	char	cwd[1024];
-
-	getcwd(cwd, sizeof(cwd));
-	printf("%s", cwd);
-}
 
 int	take_input(char *str, t_mini *mini)
 {
 	char	*buf;
 	//char	**args;
 	t_env	*env;
-
+	char	cwd[1024];
+	
 	env = mini->env;
-	buf = readline(" % ");
+	getcwd(cwd, sizeof(cwd));
+	ft_strlcat(cwd, " % ", 1024);
+	buf = readline(cwd);
 	if (ft_strlen(buf) != 0) 
 	{
 		add_history(buf);
@@ -85,10 +80,8 @@ int	main(int argc, char **argv, char **envp)
 	env = ft_init_env(&mini, envp);
 	while (1)
 	{
-		print_prompt();
 		if (take_input(inputstr, &mini))
 			continue ;
-		//printf("Here is what you wrote: %s\n", inputstr);
 	}
 	return (0);
 }
