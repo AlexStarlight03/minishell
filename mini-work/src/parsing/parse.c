@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:47:19 by adube             #+#    #+#             */
-/*   Updated: 2023/11/20 12:41:33 by adube            ###   ########.fr       */
+/*   Updated: 2024/01/18 13:15:29 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	analyze(char **args)
 	i = 0;
 	flag_singlequote = quote_check( 39, args[i]);
 	flag_doublequote = quote_check( 34, args[i]);
+	return (0);
 }
 
 void	ft_parse(char *input, t_env *env, t_mini *mini)

@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:02:17 by adube             #+#    #+#             */
-/*   Updated: 2023/11/20 11:20:05 by adube            ###   ########.fr       */
+/*   Updated: 2024/01/18 13:14:43 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_prompt(void)
 int	take_input(char *str, t_mini *mini)
 {
 	char	*buf;
-	char	**args;
+	//char	**args;
 	t_env	*env;
 
 	env = mini->env;
