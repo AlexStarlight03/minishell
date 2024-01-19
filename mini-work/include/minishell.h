@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2023/11/20 13:22:36 by adube            ###   ########.fr       */
+/*   Updated: 2024/01/19 15:43:03 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define BUFFER_SIZE 65535
 
 # include "../lib/libft/libft.h"
+# include "../lib/pipex/pipex.h"
 # include <stdlib.h>
 # include <stdbool.h>
 # include <unistd.h>
