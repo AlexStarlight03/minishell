@@ -6,7 +6,7 @@
 #    By: adube <adube@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 12:35:03 by adube             #+#    #+#              #
-#    Updated: 2024/01/29 11:27:08 by adube            ###   ########.fr        #
+#    Updated: 2024/01/29 14:51:16 by adube            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,9 @@ SRCS_LST	=	main.c \
 				builtins/export.c \
 				builtins/pwd.c \
 				builtins/unset.c \
+				pipex/parse_paths.c \
+				pipex/pipex.c \
+				pipex/utils_pipex.c \
 				path_cmds/path_cmd.c \
 				redirections/pipes.c \
 				parsing/parse_builtins.c \
@@ -70,7 +73,7 @@ run: 	all
 		@./$(NAME)
 
 dir :
-		@mkdir -p $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)redirections $(OBJS_DIR)builtins $(OBJS_DIR)path_cmds
+		@mkdir -p $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)redirections $(OBJS_DIR)builtins $(OBJS_DIR)pipex $(OBJS_DIR)path_cmds
 		@mkdir -p $(LIBRLINE_DIR)
 
 readline :
@@ -83,11 +86,11 @@ readline :
 		rm -rf ../$(LIBRLINE); \
 		echo "----------------------- Readline succesfully configured ✅ -----------------------\n"; \
 	fi
-
+	
 clean:
 				@make -C $(LIBFT_DIR) clean
 				@make -C $(PIPEX_DIR) clean
-				@$(RM) $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)redirections $(OBJS_DIR)builtins $(OBJS_DIR)path_cmds
+				@$(RM) $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)redirections $(OBJS_DIR)builtins $(OBJS_DIR)pipex $(OBJS_DIR)path_cmds
 				@echo -e "object deleted!"
 
 fclean:			clean

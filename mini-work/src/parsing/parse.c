@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:47:19 by adube             #+#    #+#             */
-/*   Updated: 2024/01/29 12:50:04 by adube            ###   ########.fr       */
+/*   Updated: 2024/01/29 14:57:37 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,32 +49,32 @@ char	*quote_check(char quote_type, char *arg)
 
 char	*analyze(char *args)
 {
-	args = quote_check(39, args);
-	args = quote_check(34, args);
+	args = quote_check('\"', args);
+	args = quote_check('\'', args);
 	return (args);
 }
 
-void	ft_parse(char *input, t_env *env, t_mini *mini)
+void	parse(char *input, t_env *env, t_mini *mini, char **envp)
 {
 	int		cmd;
+	char	*command;
 	char	**args;
-	int		i;
-	int		j;
-	
-	j = 0;
-	i = 0;
+	int		index;
+
+	index = 0;
 	args = ft_split(input, ' ');
-	while (args[i])
+	while (args[index])
 	{
-		args[i] = analyze(args[i]);
-		i++;
+		args[index] = analyze(args[index]);
+		index++;
 	}
 	cmd = is_a_builtin(args);
 	if (cmd != 1)
 		exec_builtin(mini, env, args, cmd);
-	cmd = find_cmd(args[0], env)
-	else if (cmd != NULL)
-		execve(0, (char *const *)args[1], (char *const *)env);
-	else
-		return ;
+//	ft_pipex(args, env);
+	command = cmd_path(args[0], env);
+	//printf("%s\n", command);
+	if (command != NULL)
+		execve(command, args, envp); //passer notre env comme du monde
+//	return ;
 }

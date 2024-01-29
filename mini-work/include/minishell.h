@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2024/01/29 11:38:21 by adube            ###   ########.fr       */
+/*   Updated: 2024/01/29 14:57:15 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,18 @@ void	free_lst_node(t_mini *mini, t_env *env);
 
 /* Parsing */
 int		is_a_builtin(char **args);
-void	ft_parse(char *input, t_env *env, t_mini *mini);
+void	parse(char *input, t_env *env, t_mini *mini);
 void	exec_builtin(t_mini *mini, t_env *env, char **args, int cmd);
 
 /* Redirections */
 int		pipes_prep(t_mini *mini);
 
 /* path_cmds */
-bool	find_cmd(char *cmd, t_env *env);
+char	*cmd_path(char *command, t_env *env);
+int	ft_pipex(char **argv, t_env *env);
+int	check_error(int return_value, char *message);
+void	free_table(char *str, char **tab);
+char	*find_cmd(char *cmd, t_env *env);
 char	*env_path(t_env *env);
 
 #endif
