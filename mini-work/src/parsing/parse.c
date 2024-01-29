@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:47:19 by adube             #+#    #+#             */
-/*   Updated: 2024/01/29 10:04:59 by adube            ###   ########.fr       */
+/*   Updated: 2024/01/29 12:50:04 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ char	*arg_no_quote(char *arg, int quote1, int quote2)
 			i++;
 		}
 		new_arg[index] = '\0';
-		printf("%s", new_arg);
 		return (new_arg);
 }
 
@@ -73,6 +72,9 @@ void	ft_parse(char *input, t_env *env, t_mini *mini)
 	cmd = is_a_builtin(args);
 	if (cmd != 1)
 		exec_builtin(mini, env, args, cmd);
+	cmd = find_cmd(args[0], env)
+	else if (cmd != NULL)
+		execve(0, (char *const *)args[1], (char *const *)env);
 	else
 		return ;
 }

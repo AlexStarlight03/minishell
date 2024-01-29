@@ -6,7 +6,7 @@
 #    By: adube <adube@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 12:35:03 by adube             #+#    #+#              #
-#    Updated: 2024/01/19 16:06:10 by adube            ###   ########.fr        #
+#    Updated: 2024/01/29 11:27:08 by adube            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,11 @@ SRCS_LST	=	main.c \
 				builtins/export.c \
 				builtins/pwd.c \
 				builtins/unset.c \
+				path_cmds/path_cmd.c \
 				redirections/pipes.c \
 				parsing/parse_builtins.c \
-				parsing/parse.c
+				parsing/parse.c 
+
 SRCS		=	$(addprefix $(SRCS_DIR), $(SRCS_LST))
 
 #FILES AND PATH
@@ -68,7 +70,7 @@ run: 	all
 		@./$(NAME)
 
 dir :
-		@mkdir -p $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)redirections $(OBJS_DIR)builtins
+		@mkdir -p $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)redirections $(OBJS_DIR)builtins $(OBJS_DIR)path_cmds
 		@mkdir -p $(LIBRLINE_DIR)
 
 readline :
@@ -85,7 +87,7 @@ readline :
 clean:
 				@make -C $(LIBFT_DIR) clean
 				@make -C $(PIPEX_DIR) clean
-				@$(RM) $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)redirections $(OBJS_DIR)builtins
+				@$(RM) $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)redirections $(OBJS_DIR)builtins $(OBJS_DIR)path_cmds
 				@echo -e "object deleted!"
 
 fclean:			clean
