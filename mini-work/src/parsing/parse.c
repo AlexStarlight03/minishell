@@ -6,57 +6,45 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:47:19 by adube             #+#    #+#             */
-/*   Updated: 2024/01/18 16:42:50 by adube            ###   ########.fr       */
+/*   Updated: 2024/01/29 10:04:59 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+char	*arg_no_quote(char *arg, int quote1, int quote2)
+{
+		int		i;
+		int		index;
+		char	*new_arg;
+		
+		i = 0;
+		index = 0;
+		new_arg = malloc(sizeof(char *) * strlen(arg) - 2);
+		while (arg[i] != '\0')
+		{
+			if (i != quote1 && i != quote2)
+				new_arg[index++] = arg[i];
+			i++;
+		}
+		new_arg[index] = '\0';
+		printf("%s", new_arg);
+		return (new_arg);
+}
+
 char	*quote_check(char quote_type, char *arg)
 {
 	int		len;
-	bool	first;
-	bool	last;
 	int		i;
-	int		index;
-	int		y;
-	char	*new_arg;
 
-	len = strlen(arg);
-	first = false;
-	last = false;
+	len = (int)strlen(arg) - 1;
 	i = 0;
-	index = 0;
-	y = 0;
-	//printf("%c", quote_type);
-	while(arg[i++] != '\0')
-	{
-		if(arg[i] == quote_type)
-		{
-			first = true;
-			break ;
-		}
-	}
-	while(arg[len--] && len >= 0)
-	{
-		if(arg[len] == quote_type)
-		{
-			last = true;
-			break ;
-		}
-	}
-	if (first == true && last == true)
-	{
-		new_arg = malloc(sizeof(char *));
-		while (arg[index] != '\0')
-		{
-			if (arg[index] != 39 && arg[index] != 34)
-				new_arg[y++] = arg[index];
-			index++;
-		}
-		new_arg[y] = '\0';
-	//	printf("%s", new_arg);
-		return (new_arg);
-	}
+	while(arg[i] != '\0' && arg[i] != quote_type)
+		i++;
+	while(arg[len] && len >= 0 && arg[len] != quote_type)
+		len--;
+	if (len != i)
+		arg = arg_no_quote(arg, i, len);
 	return (arg);
 }
 

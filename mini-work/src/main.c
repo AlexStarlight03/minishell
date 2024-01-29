@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:02:17 by adube             #+#    #+#             */
-/*   Updated: 2024/01/19 15:47:08 by adube            ###   ########.fr       */
+/*   Updated: 2024/01/29 09:22:43 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	main(int argc, char **argv, char **envp)
 	env = ft_init_env(&mini, envp);
 	while (1)
 	{
-		pipex(argc, argv, envp);
+		//pipex(argc, argv, envp);
 		if (take_input(inputstr, &mini))
 			continue ;
 	}
