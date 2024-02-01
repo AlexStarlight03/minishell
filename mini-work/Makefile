@@ -6,7 +6,7 @@
 #    By: adube <adube@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 12:35:03 by adube             #+#    #+#              #
-#    Updated: 2024/01/29 14:51:16 by adube            ###   ########.fr        #
+#    Updated: 2024/02/01 14:44:08 by adube            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,10 +45,6 @@ LIBFT_DIR	=	./lib/libft/
 LIBFT		=	$(LIBFT_DIR)libft.a
 LIBFT_H		=	$(LIBFT_DIR)libft.h
 
-PIPEX_DIR	=	./lib/pipex/
-PIPEX		=	$(PIPEX_DIR)pipex.a
-PIPEX_H		=	$(PIPEX_DIR)pipex.h
-
 LIBRLINE 		= readline-8.2
 LIBRLINE_DIR	= ./lib/readline/
 RLINE			= $(LIBRLINE_DIR)libreadline.a
@@ -63,8 +59,7 @@ all : dir readline $(NAME)
 
 $(NAME) : 	$(OBJS)
 			@make -C $(LIBFT_DIR)
-			@make -C $(PIPEX_DIR)
-			@$(CC) $(FLAGS) $(SRCS) $(LIBFT) $(PIPEX) $(RLINE) -lncurses -o $(NAME)
+			@$(CC) $(FLAGS) $(SRCS) $(LIBFT) $(RLINE) -lncurses -o $(NAME)
 
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c $(HEADER)
 				@$(CC) $(FLAGS) -c $< -o $@
@@ -89,14 +84,12 @@ readline :
 	
 clean:
 				@make -C $(LIBFT_DIR) clean
-				@make -C $(PIPEX_DIR) clean
 				@$(RM) $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)redirections $(OBJS_DIR)builtins $(OBJS_DIR)pipex $(OBJS_DIR)path_cmds
 				@echo -e "object deleted!"
 
 fclean:			clean
 				@$(RM) $(NAME)
 				@make -C $(LIBFT_DIR) fclean
-				@make -C $(PIPEX_DIR) fclean
 #				@$(RM) $(LIBRLINE_DIR)
 				@echo -e "everything clean!"
 

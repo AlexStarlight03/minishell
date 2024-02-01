@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:27 by adube             #+#    #+#             */
-/*   Updated: 2023/11/20 09:50:39 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/01 12:22:24 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	free_lst_node(t_mini *mini, t_env *env)
 		return ;
 	}
 	ft_memdel(env->content);
-	ft_memdel(env);
+	ft_memdel((char *)env);
 }
 
 bool	ft_unset(t_mini *mini, char **cmd)

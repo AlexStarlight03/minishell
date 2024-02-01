@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2024/01/29 14:57:15 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/01 15:09:55 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # define BUFFER_SIZE 65535
 
 # include "../lib/libft/libft.h"
-# include "../lib/pipex/pipex.h"
 # include <stdlib.h>
 # include <stdbool.h>
 # include <unistd.h>
@@ -56,17 +55,14 @@ typedef struct s_tokens
 	char		*data;
 }				t_tokens;
 
-typedef struct s_env
-{
-	char			*content;
-	struct s_env	*next;
-}				t_env;
-
 typedef struct s_mini
 {
 	int				fdin;
 	int				fdout;
-	t_env			*env;
+	int				line;
+	char			*path;
+	char			**command;
+	char			**env;
 }				t_mini;
 
 /* Main */
@@ -94,11 +90,11 @@ void	exec_builtin(t_mini *mini, t_env *env, char **args, int cmd);
 int		pipes_prep(t_mini *mini);
 
 /* path_cmds */
-char	*cmd_path(char *command, t_env *env);
-int	ft_pipex(char **argv, t_env *env);
-int	check_error(int return_value, char *message);
+int		ft_pipex(t_env *env, t_mini *mini);
+int		check_error(int return_value, char *message);
 void	free_table(char *str, char **tab);
 char	*find_cmd(char *cmd, t_env *env);
 char	*env_path(t_env *env);
+void	execute(t_env *env, t_mini *mini);
 
 #endif

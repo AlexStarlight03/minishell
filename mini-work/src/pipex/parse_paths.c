@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 11:32:11 by mchampag          #+#    #+#             */
-/*   Updated: 2024/01/29 14:32:18 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/01 14:46:24 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static char	*valid_env(char *command, t_env *env)
 {
 	if (env)
 	{
-		//if (!env)
-		//	check_error(-1, "env is empty");
+		if (!env)
+			check_error(-1, "env is empty");
 		if (command[0] == '/')
 			return (command);
 		while (!ft_strnstr(env->content, "PATH", 4))
@@ -56,15 +56,11 @@ static char	*valid_env(char *command, t_env *env)
 	return (0);
 }
 
-char	*cmd_path(char *command, t_env *env)
+int	cmd_path(char **command, t_mini *mini, t_env *env)
 {
-	char	**cmd;
-	char	*path;
-
-	cmd = ft_split(command, ' ');
-	path = find_path(cmd[0], valid_env(command, env));
-	return (path);
-	if (cmd && path)
-		 	execve(path, cmd, (char *const *)env);
-	free_table(path, cmd);
+	mini->command = command;
+	mini->path = find_path(mini->command[0], valid_env(command[0], env));
+	if (mini->command && mini->path)
+		return (0); //put error returns
+	return (-1);
 }

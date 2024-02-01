@@ -1,28 +1,28 @@
 
-SRCS			= ./src/execute.c ./src/pipex.c ./src/utils.c
+# SRCS			= ./src/execute.c ./src/pipex.c ./src/utils.c
 
-OBJS			= $(SRCS:.c=.o)
+# OBJS			= $(SRCS:.c=.o)
 
-CC				= gcc
-RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror
+# CC				= gcc
+# RM				= rm -f
+# CFLAGS			= -Wall -Wextra -Werror
 
-NAME			= pipex.a
+# NAME			= pipex.a
 
-all:			$(NAME)
+# all:			$(NAME)
 
-$(NAME):		$(OBJS)
-				ar rcs $(NAME) $(OBJS)
+# $(NAME):		$(OBJS)
+# 				ar rcs $(NAME) $(OBJS)
 
-clean:
-				$(RM) $(OBJS)
+# clean:
+# 				$(RM) $(OBJS)
 
-fclean:			clean
-				$(RM) $(NAME)
+# fclean:			clean
+# 				$(RM) $(NAME)
 
-re:				fclean $(NAME)
+# re:				fclean $(NAME)
 
-.PHONY:			all clean fclean re bonus
+# .PHONY:			all clean fclean re bonus
 
 
 
