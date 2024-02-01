@@ -6,13 +6,13 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:31:00 by adube             #+#    #+#             */
-/*   Updated: 2024/01/29 10:49:57 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/01 16:27:35 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	exec_builtin(t_mini *mini, t_env *env, char **args, int cmd)
+void	exec_builtin(t_mini *mini, char **env, char **args, int cmd)
 {
 	if (cmd == CD)
 		cd(env, args);
@@ -21,7 +21,7 @@ void	exec_builtin(t_mini *mini, t_env *env, char **args, int cmd)
 	if (cmd == ENV)
 		ft_env(env);
 	if (cmd == EXIT)
-		ft_exit(mini, env);
+		ft_exit(mini);
 	if (cmd == EXPORT)
 		ft_export(args, env);
 	if (cmd == UNSET)

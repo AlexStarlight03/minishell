@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:51:39 by adube             #+#    #+#             */
-/*   Updated: 2024/02/01 13:23:50 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/01 16:15:04 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 //needs to split what env_path returns in a char **paths
 
-char	**env_paths(t_env *env)
+char	**env_paths(char **env)
 {
 	char	**path_tab;
 	char	*path;
-	path = env->content;
+	int		i;
+
+	
+	path = env[0];
 	while (ft_strncmp("PATH", path, 4))
 	{
 		env = env->next;
@@ -30,13 +33,13 @@ char	**env_paths(t_env *env)
 	return (path_tab);
 }
 
-char	*find_cmd(char *cmd, t_env *env)
+char	*find_cmd(char *cmd, t_mini *mini)
 {
 	char	*temp;
 	char	*command;
 	char	**paths;
 
-	paths = env_paths(env);
+	paths = env_paths(mini->env);
 	if (cmd[0] == '/')
 		return(cmd);
 	while (*paths)

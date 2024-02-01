@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 11:32:11 by mchampag          #+#    #+#             */
-/*   Updated: 2024/02/01 14:46:24 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/01 16:27:35 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,28 @@ static	char	*find_path(char *command, char *path)
 	return (test_path);
 }
 
-static char	*valid_env(char *command, t_env *env)
+static char	*valid_env(char *command, char **env)
 {
 	if (env)
 	{
-		if (!env)
+		if (!env[0])
 			check_error(-1, "env is empty");
 		if (command[0] == '/')
 			return (command);
-		while (!ft_strnstr(env->content, "PATH", 4))
+		while (!ft_strnstr(*env, "PATH", 4))
 		{
-			env = env->next;
-			if (!env->content)
+			env++;
+			if (!*env)
 				check_error(-1, "No PATH");
 		}
-		return (env->content);
+		return (*env);
 	}
 	else
 		check_error(-1, "No env");
 	return (0);
 }
 
-int	cmd_path(char **command, t_mini *mini, t_env *env)
+int	cmd_path(char **command, t_mini *mini, char **env)
 {
 	mini->command = command;
 	mini->path = find_path(mini->command[0], valid_env(command[0], env));
@@ -64,3 +64,25 @@ int	cmd_path(char **command, t_mini *mini, t_env *env)
 		return (0); //put error returns
 	return (-1);
 }
+
+
+// static char	*valid_env(char *command, char **env)
+// {
+// 	if (env)
+// 	{
+// 		if (!env)
+// 			check_error(-1, "env is empty");
+// 		if (command[0] == '/')
+// 			return (command);
+// 		while (!ft_strnstr(env->content, "PATH", 4))
+// 		{
+// 			env = env->next;
+// 			if (!env->content)
+// 				check_error(-1, "No PATH");
+// 		}
+// 		return (env->content);
+// 	}
+// 	else
+// 		check_error(-1, "No env");
+// 	return (0);
+// }

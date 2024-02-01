@@ -6,13 +6,13 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:12 by adube             #+#    #+#             */
-/*   Updated: 2024/02/01 15:03:39 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/01 16:39:28 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*get_path(t_mini *mini, char *var_name, int len)
+static char	*get_path(t_mini *mini, char *var_name, int len)
 {
 	char	env_name[1024];
 	char	*path;
@@ -26,14 +26,17 @@ char	*get_path(t_mini *mini, char *var_name, int len)
 		if (ft_strcmp(var_name, env_name) == 0)
 		{
 			while (mini->env[i][len] != '\0')
-				path[i++] = mini->env[i][len++];
+			{
+				path[i] = mini->env[i][len++];
+				i++;
+			}
 			return (path);
 		}
 	}
 	return (NULL);
 }
 
-void	change_oldpwd(t_mini *mini)
+static void	change_oldpwd(t_mini *mini)
 {
 	char	cwd[1024];
 	char	*oldpwd;
@@ -45,7 +48,7 @@ void	change_oldpwd(t_mini *mini)
 	ft_memdel(oldpwd);
 }
 
-int	path_move(int dest, t_mini *mini)
+static int	path_move(int dest, t_mini *mini)
 {
 	int		ret;
 	char	*env_path;

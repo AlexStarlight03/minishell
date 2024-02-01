@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:02:17 by adube             #+#    #+#             */
-/*   Updated: 2024/02/01 14:54:00 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/01 16:34:33 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ int	take_input(char *str, t_mini *mini)
 {
 	char	*buf;
 	//char	**args;
-	t_env	*env;
 	char	cwd[1024];
 	
-	env = mini->env;
 	getcwd(cwd, sizeof(cwd));
 	ft_strlcat(cwd, " % ", 1024);
 	buf = readline(cwd);
@@ -29,60 +27,61 @@ int	take_input(char *str, t_mini *mini)
 		add_history(buf);
 		ft_strcpy(str, buf);
 		//tokenize the str into tken (tableaux pour envoyer aux commandes), split seulement pour tester cmds
-		parse(str, env, mini);
+		parse(str, mini->env, mini);
 		return (0);
 	}
 	else
 		return (1);
 }
 
-t_env	*ft_init_env(t_mini *mini, char **envp)
-{
-	t_env	*env;
-	t_env	*new;
-	int		i;
+// t_env	*ft_init_env(t_mini *mini, char **envp)
+// {
+// 	t_env	*env;
+// 	t_env	*new;
+// 	int		i;
 
-	env = malloc(sizeof(t_env));
-	if (env == NULL)
-		return (NULL);
-	if (envp[0] == NULL)
-		return (NULL);
-	env->content = ft_strdup(envp[0]);
-	env->next = NULL;
-	mini->env = env;
-	i = 1;
-	while (envp && envp[i])
-	{
-		new = malloc(sizeof(t_env));
-		if (new == NULL)
-			return (NULL);
-		new->content = ft_strdup(envp[i]);
-		new->next = NULL;
-		env->next = new;
-		env = new;
-		i++;
-	}
-	return (env);
-}
+// 	env = malloc(sizeof(t_env));
+// 	if (env == NULL)
+// 		return (NULL);
+// 	if (envp[0] == NULL)
+// 		return (NULL);
+// 	env->content = ft_strdup(envp[0]);
+// 	env->next = NULL;
+// 	mini->env = env;
+// 	i = 1;
+// 	while (envp && envp[i])
+// 	{
+// 		new = malloc(sizeof(t_env));
+// 		if (new == NULL)
+// 			return (NULL);
+// 		new->content = ft_strdup(envp[i]);
+// 		new->next = NULL;
+// 		env->next = new;
+// 		env = new;
+// 		i++;
+// 	}
+// 	return (env);
+// }
 
-char	**ft_init_env(t_mini *mini, char **envp)
+char	**init_env(t_mini *mini, char **envp)
 {
 	char	**env;
 	int		i;
 
-	// env = malloc(sizeof(t_env));
-	// if (env == NULL)
-	// 	return (NULL);
+	env = malloc(sizeof(char *));
+	if (env == NULL)
+		return (NULL);
 	if (envp[0] == NULL)
 		return (NULL);
 	i = -1;
 	while (envp && envp[++i])
 	{
-		//new = malloc(sizeof(t_env));
-		//if (new == NULL)
-		//	return (NULL);
+		// new = malloc(sizeof(char *));
+		// if (new == NULL)
+		// 	return (NULL);
 		env[i] = ft_strdup(envp[i]);
 	}
+	mini->line = i;
 	return (env);
 }
 
@@ -93,16 +92,17 @@ int	main(int argc, char **argv, char **envp)
 	t_mini	*mini;
 
 	(void)argv;
-	if (argc != 1)
+	if (argc != 1) // pour pas se faire chier avec argc
 	{
 		//error_function;
 		exit(127);
 	}
-	mini->env = ft_init_env(&mini, envp);
+	mini = malloc(sizeof(t_mini));
+	mini->env = init_env(mini, envp);
 	while (1)
 	{
 		//pipex(argc, argv, envp);
-		if (take_input(inputstr, &mini))
+		if (take_input(inputstr, mini))
 			continue ;
 	}
 	return (0);
