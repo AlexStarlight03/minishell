@@ -6,15 +6,37 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:11:40 by mchampag          #+#    #+#             */
-/*   Updated: 2024/02/02 09:51:25 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/02 11:00:03 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+//new function, sera peut-etre a modifier
+char	**env_exec(t_env *env)
+{
+	char **new_env;
+	int	i;
+
+	i = 0;
+	new_env = malloc(sizeof(char *));
+	while(env->next != NULL)
+	{
+		new_env[i] = env->content;
+		env = env->next;
+		i++;
+	}
+	if (env->next->content)
+		new_env[i] = env->next->content;
+	return(new_env);
+}
+
 void execute(t_mini *mini)
 {
-	execve(mini->path, mini->command, 0); //put error returns
+	//FAIRE FONCTION POUR AVOIR ENV EN CHAR **
+	char **env;
+	env = env_exec(mini->env);
+	execve(mini->path, mini->command, env); //put error returns
 	free_table(mini->path, mini->command);
 }
 

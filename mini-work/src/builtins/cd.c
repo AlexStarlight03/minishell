@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:12 by adube             #+#    #+#             */
-/*   Updated: 2024/02/02 09:38:22 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/02 10:44:00 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char	*get_path(t_env *env, char *var_name, int len)
 	}
 	return (NULL);
 }
+
+///PWD in ENV DOESNT CHANGE WHEN WE MOVE WITH CD! NEEDS TO BE FIXED
 
 void	change_oldpwd(t_env *env)
 {
