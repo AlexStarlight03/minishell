@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2024/02/02 09:52:26 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/02 10:18:03 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,6 @@ int		is_a_builtin(char **args);
 void	parse(char *input, t_env *env, t_mini *mini);
 void	exec_builtin(t_mini *mini, t_env *env, char **args, int cmd);
 
-/* Redirections */
-int		pipes_prep(t_mini *mini);
 
 /* path_cmds */
 int		ft_pipex(t_mini *mini);

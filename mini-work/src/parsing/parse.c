@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:47:19 by adube             #+#    #+#             */
-/*   Updated: 2024/02/02 09:59:29 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/02 10:12:09 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char	*quote_check(char quote_type, char *arg)
 
 char	*analyze(char *args)
 {
+	//make sure it eliminates all quotes in the right order!!
 	args = quote_check(39, args);
 	args = quote_check(34, args);
 	return (args);
@@ -74,7 +75,8 @@ void	parse(char *input, t_env *env, t_mini *mini)
 	if (cmd != 1)
 		exec_builtin(mini, env, args, cmd);
 	cmd_path(args, mini, env);
-//	ft_pipex(mini);
+	if (cmd == 1)
+		ft_pipex(mini);
 	//printf("%s\n", command);
 	//if (command != NULL)
 	//	execve(command, args, 0); //passer notre env comme du monde

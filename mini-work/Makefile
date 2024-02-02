@@ -6,7 +6,7 @@
 #    By: adube <adube@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 12:35:03 by adube             #+#    #+#              #
-#    Updated: 2024/02/02 09:34:04 by adube            ###   ########.fr        #
+#    Updated: 2024/02/02 10:18:28 by adube            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,6 @@ SRCS_LST	=	main.c \
 				pipex/parse_paths.c \
 				pipex/pipex.c \
 				pipex/utils_pipex.c \
-				path_cmds/path_cmd.c \
 				parsing/parse_builtins.c \
 				parsing/parse.c 
 
@@ -67,7 +66,7 @@ run: 	all
 		@./$(NAME)
 
 dir :
-		@mkdir -p $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)builtins $(OBJS_DIR)pipex $(OBJS_DIR)path_cmds
+		@mkdir -p $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)builtins $(OBJS_DIR)pipex
 		@mkdir -p $(LIBRLINE_DIR)
 
 readline :
@@ -83,7 +82,7 @@ readline :
 	
 clean:
 				@make -C $(LIBFT_DIR) clean
-				@$(RM) $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)builtins $(OBJS_DIR)pipex $(OBJS_DIR)path_cmds
+				@$(RM) $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)builtins $(OBJS_DIR)pipex
 				@echo -e "object deleted!"
 
 fclean:			clean
