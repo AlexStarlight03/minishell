@@ -6,7 +6,7 @@
 #    By: adube <adube@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 12:35:03 by adube             #+#    #+#              #
-#    Updated: 2024/02/01 14:44:08 by adube            ###   ########.fr        #
+#    Updated: 2024/02/02 09:34:04 by adube            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,6 @@ SRCS_LST	=	main.c \
 				pipex/pipex.c \
 				pipex/utils_pipex.c \
 				path_cmds/path_cmd.c \
-				redirections/pipes.c \
 				parsing/parse_builtins.c \
 				parsing/parse.c 
 
@@ -41,7 +40,7 @@ HEADER_DIR	=	./include/
 HEADER_LST	=	minishell.h
 HEADER	 	=	$(addprefix $(HEADER_DIR), $(HEADER_LST))
 
-LIBFT_DIR	=	./lib/libft/
+LIBFT_DIR	=	./lib/libft42/
 LIBFT		=	$(LIBFT_DIR)libft.a
 LIBFT_H		=	$(LIBFT_DIR)libft.h
 
@@ -68,7 +67,7 @@ run: 	all
 		@./$(NAME)
 
 dir :
-		@mkdir -p $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)redirections $(OBJS_DIR)builtins $(OBJS_DIR)pipex $(OBJS_DIR)path_cmds
+		@mkdir -p $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)builtins $(OBJS_DIR)pipex $(OBJS_DIR)path_cmds
 		@mkdir -p $(LIBRLINE_DIR)
 
 readline :
@@ -84,7 +83,7 @@ readline :
 	
 clean:
 				@make -C $(LIBFT_DIR) clean
-				@$(RM) $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)redirections $(OBJS_DIR)builtins $(OBJS_DIR)pipex $(OBJS_DIR)path_cmds
+				@$(RM) $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)builtins $(OBJS_DIR)pipex $(OBJS_DIR)path_cmds
 				@echo -e "object deleted!"
 
 fclean:			clean

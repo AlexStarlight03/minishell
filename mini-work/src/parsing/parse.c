@@ -6,11 +6,12 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:47:19 by adube             #+#    #+#             */
-/*   Updated: 2024/02/01 14:38:50 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/02 09:59:29 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
 
 char	*arg_no_quote(char *arg, int quote1, int quote2)
 {
@@ -49,31 +50,31 @@ char	*quote_check(char quote_type, char *arg)
 
 char	*analyze(char *args)
 {
-	args = quote_check('\"', args);
-	args = quote_check('\'', args);
+	args = quote_check(39, args);
+	args = quote_check(34, args);
 	return (args);
 }
 
 void	parse(char *input, t_env *env, t_mini *mini)
 {
 	int		cmd;
-	char	*command;
-	char	*path;
 	char	**args;
-	int		index;
-
-	index = 0;
+	int		i;
+	int		j;
+	
+	j = 0;
+	i = 0;
 	args = ft_split(input, ' ');
-	while (args[index])
+	while (args[i])
 	{
-		args[index] = analyze(args[index]);
-		index++;
+		args[i] = analyze(args[i]);
+		i++;
 	}
 	cmd = is_a_builtin(args);
 	if (cmd != 1)
 		exec_builtin(mini, env, args, cmd);
-	cmd_path(args, env);
-	ft_pipex(env, mini);
+	cmd_path(args, mini, env);
+//	ft_pipex(mini);
 	//printf("%s\n", command);
 	//if (command != NULL)
 	//	execve(command, args, 0); //passer notre env comme du monde

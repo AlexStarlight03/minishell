@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:13:52 by adube             #+#    #+#             */
-/*   Updated: 2024/02/01 15:07:06 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/02 09:39:03 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,22 @@ char	*get_var_name(char *dest, char *src)
 	return (dest);
 }
 
-int	check_env(t_mini *mini, char *args)
+int	check_env(t_env *env, char *args)
 {
 	char	var_name[1024];
 	char	env_name[1024];
-	int		i;
 
-	i = -1;
 	get_var_name(var_name, args);
-	while (mini->env && mini->env[++i])
+	while (env && env->next)
 	{
-		get_var_name(env_name, mini->env[i]);
+		get_var_name(env_name, env->content);
 		if (ft_strcmp(var_name, env_name) == 0)
 		{
-			ft_memdel(mini->env[i]);
-			mini->env[i] = ft_strdup(args);
+			ft_memdel(env->content);
+			env->content = ft_strdup(args);
 			return (0);
 		}
+		env = env->next;
 	}
 	return (1);
 }
@@ -81,22 +80,22 @@ bool	env_add_back(t_env *env, char *str)
 	return (true);
 }
 
-int	ft_export(char **cmd, t_mini *mini)
+int	ft_export(char **cmd, t_env *env)
 {
 	int		i;
-	char 	**temp;
+	t_env 	*temp;
 	int		flag;
 	
 	i = 0;
 	while (cmd[++i])
 	{
 		flag = 0;
-		temp = mini->env;
+		temp = env;
 		if (check_env(temp, cmd[i]) == 0)
  			flag = 1;
  		else if (flag != 1)
  			env_add_back(temp, cmd[i]);
-		mini->env = temp;
+		env = temp;
 	}
 	return (0);
 }

@@ -6,22 +6,20 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:19 by adube             #+#    #+#             */
-/*   Updated: 2024/02/01 14:57:30 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/02 09:38:44 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	ft_env(char **env)
+int	ft_env(t_env *env)
 {
-	int	i;
-
-	i = -1;
-	while (env && env[++i])
+	while (env && env->next != NULL)
 	{
-		ft_putendl_fd(env[i], 1);
+		ft_putendl_fd(env->content, 1);
+		env = env->next;
 	}
 	if (env)
-		ft_putendl_fd(env[i], 1);
+		ft_putendl_fd(env->content, 1);
 	return (0);
 }

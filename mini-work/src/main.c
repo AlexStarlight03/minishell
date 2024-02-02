@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:02:17 by adube             #+#    #+#             */
-/*   Updated: 2024/02/01 14:54:00 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/02 09:58:03 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	take_input(char *str, t_mini *mini)
 	else
 		return (1);
 }
-
 t_env	*ft_init_env(t_mini *mini, char **envp)
 {
 	t_env	*env;
@@ -65,32 +64,11 @@ t_env	*ft_init_env(t_mini *mini, char **envp)
 	return (env);
 }
 
-char	**ft_init_env(t_mini *mini, char **envp)
-{
-	char	**env;
-	int		i;
-
-	// env = malloc(sizeof(t_env));
-	// if (env == NULL)
-	// 	return (NULL);
-	if (envp[0] == NULL)
-		return (NULL);
-	i = -1;
-	while (envp && envp[++i])
-	{
-		//new = malloc(sizeof(t_env));
-		//if (new == NULL)
-		//	return (NULL);
-		env[i] = ft_strdup(envp[i]);
-	}
-	return (env);
-}
-
-
 int	main(int argc, char **argv, char **envp)
 {
 	char	inputstr[1024];
-	t_mini	*mini;
+	t_mini	mini;
+	t_env	*env;
 
 	(void)argv;
 	if (argc != 1)
@@ -98,7 +76,7 @@ int	main(int argc, char **argv, char **envp)
 		//error_function;
 		exit(127);
 	}
-	mini->env = ft_init_env(&mini, envp);
+	env = ft_init_env(&mini, envp);
 	while (1)
 	{
 		//pipex(argc, argv, envp);
