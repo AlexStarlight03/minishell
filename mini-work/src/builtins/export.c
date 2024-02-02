@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:13:52 by adube             #+#    #+#             */
-/*   Updated: 2024/02/01 16:41:00 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/01 15:07:06 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,56 +47,56 @@ int	check_env(t_mini *mini, char *args)
 	return (1);
 }
 
-// t_env	*lstsecondlast(t_env *lst)
-// {
-// 	if (!lst)
-// 		return (NULL);
-// 	while (lst->next->next)
-// 		lst = lst->next;
-// 	return (lst);
-// }
+t_env	*lstsecondlast(t_env *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst->next->next)
+		lst = lst->next;
+	return (lst);
+}
 
-// static bool	env_add_back(t_env *env, char *str)
-// {
-// 	t_env	*new;
-// 	t_env	*sec_last;
-// 	t_env	*temp;
+bool	env_add_back(t_env *env, char *str)
+{
+	t_env	*new;
+	t_env	*sec_last;
+	t_env	*temp;
 
-// 	if (str == NULL)
-// 		return (false);
-// 	new = malloc(sizeof(t_env));
-// 	if (!new)
-// 		return (false);
-// 	new->content = ft_strdup(str);
-// 	if (env == NULL)
-// 	{
-// 		env = new;
-// 		return (true);
-// 	}
-// 	sec_last = lstsecondlast(env);
-// 	temp = sec_last->next;
-// 	sec_last->next = new;
-// 	sec_last->next->next = temp;
-// 	sec_last->next->next->next = NULL;
-// 	return (true);
-// }
+	if (str == NULL)
+		return (false);
+	new = malloc(sizeof(t_env));
+	if (!new)
+		return (false);
+	new->content = ft_strdup(str);
+	if (env == NULL)
+	{
+		env = new;
+		return (true);
+	}
+	sec_last = lstsecondlast(env);
+	temp = sec_last->next;
+	sec_last->next = new;
+	sec_last->next->next = temp;
+	sec_last->next->next->next = NULL;
+	return (true);
+}
 
-// int	ft_export(char **cmd, t_mini *mini)
-// {
-// 	int		i;
-// 	char 	**temp;
-// 	int		flag;
+int	ft_export(char **cmd, t_mini *mini)
+{
+	int		i;
+	char 	**temp;
+	int		flag;
 	
-// 	i = 0;
-// 	while (cmd[++i])
-// 	{
-// 		flag = 0;
-// 		temp = mini->env;
-// 		if (check_env(temp, cmd[i]) == 0)
-//  			flag = 1;
-//  		else if (flag != 1)
-//  			env_add_back(temp, cmd[i]);
-// 		mini->env = temp;
-// 	}
-// 	return (0);
-// }
+	i = 0;
+	while (cmd[++i])
+	{
+		flag = 0;
+		temp = mini->env;
+		if (check_env(temp, cmd[i]) == 0)
+ 			flag = 1;
+ 		else if (flag != 1)
+ 			env_add_back(temp, cmd[i]);
+		mini->env = temp;
+	}
+	return (0);
+}

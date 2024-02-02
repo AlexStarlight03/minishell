@@ -6,7 +6,7 @@
 #    By: adube <adube@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 12:35:03 by adube             #+#    #+#              #
-#    Updated: 2024/02/01 16:27:09 by adube            ###   ########.fr        #
+#    Updated: 2024/02/01 14:44:08 by adube            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ HEADER_DIR	=	./include/
 HEADER_LST	=	minishell.h
 HEADER	 	=	$(addprefix $(HEADER_DIR), $(HEADER_LST))
 
-LIBFT_DIR	=	./lib/libft42/
+LIBFT_DIR	=	./lib/libft/
 LIBFT		=	$(LIBFT_DIR)libft.a
 LIBFT_H		=	$(LIBFT_DIR)libft.h
 

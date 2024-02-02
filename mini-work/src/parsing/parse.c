@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:47:19 by adube             #+#    #+#             */
-/*   Updated: 2024/02/01 16:27:35 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/01 14:38:50 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*analyze(char *args)
 	return (args);
 }
 
-void	parse(char *input, char **env, t_mini *mini)
+void	parse(char *input, t_env *env, t_mini *mini)
 {
 	int		cmd;
 	char	*command;
@@ -72,8 +72,8 @@ void	parse(char *input, char **env, t_mini *mini)
 	cmd = is_a_builtin(args);
 	if (cmd != 1)
 		exec_builtin(mini, env, args, cmd);
-	cmd_path(args, env); // main
-	ft_pipex(mini); // main
+	cmd_path(args, env);
+	ft_pipex(env, mini);
 	//printf("%s\n", command);
 	//if (command != NULL)
 	//	execve(command, args, 0); //passer notre env comme du monde

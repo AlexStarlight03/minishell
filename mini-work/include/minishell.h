@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2024/02/01 16:41:11 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/01 15:09:55 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define BUFFER_SIZE 65535
 
-# include "../lib/libft42/libft.h"
+# include "../lib/libft/libft.h"
 # include <stdlib.h>
 # include <stdbool.h>
 # include <unistd.h>
@@ -69,35 +69,32 @@ typedef struct s_mini
 int		main(int argc, char **argv, char **envp);
 
 /* Builtins */
-int		cd(t_mini *mini, char **args);
+int		cd(t_env *env, char **args);
 void	ft_echo(char **args);
-int		ft_env(char **env);
-void	ft_exit(t_mini *mini);
-// int		ft_export(char **cmd, t_mini *mini);
+int		ft_env(t_env *env);
+void	ft_exit(t_mini *mini, t_env *env);
+int		ft_export(char **cmd, t_env *env);
 int		ft_pwd(void);
 bool	ft_unset(t_mini *mini, char **cmd);
-// void	free_lst_node(t_mini *mini, t_env *env);
+char	*get_var_name(char *dest, char *src);
+int		check_env(t_env *env, char *args);
+bool	env_add_back(t_env *env, char *str);
+void	free_lst_node(t_mini *mini, t_env *env);
 
 /* Parsing */
 int		is_a_builtin(char **args);
-void	parse(char *input, char **env, t_mini *mini);
-void	exec_builtin(t_mini *mini, char **env, char **args, int cmd);
+void	parse(char *input, t_env *env, t_mini *mini);
+void	exec_builtin(t_mini *mini, t_env *env, char **args, int cmd);
 
 /* Redirections */
 int		pipes_prep(t_mini *mini);
 
 /* path_cmds */
-int		ft_pipex(t_mini *mini);
+int		ft_pipex(t_env *env, t_mini *mini);
 int		check_error(int return_value, char *message);
 void	free_table(char *str, char **tab);
-char	*find_cmd(char *cmd, t_mini *mini);
-char	*env_path(t_mini *mini);
-void	execute(char **env, t_mini *mini);
-
-
-
-char	*get_var_name(char *dest, char *src);
-int		check_env(t_mini *mini, char *args);
+char	*find_cmd(char *cmd, t_env *env);
+char	*env_path(t_env *env);
+void	execute(t_env *env, t_mini *mini);
 
 #endif
-
