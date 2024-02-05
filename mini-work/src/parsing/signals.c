@@ -6,11 +6,11 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 09:26:31 by adube             #+#    #+#             */
-/*   Updated: 2024/02/05 10:30:14 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/05 12:02:40 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	ctrl_d(int signal)
 {

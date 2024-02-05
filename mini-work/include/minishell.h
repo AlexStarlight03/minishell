@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2024/02/05 10:22:53 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/05 12:02:25 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,9 @@ void	free_lst_node(t_mini *mini, t_env *env);
 int		is_a_builtin(char **args);
 void	parse(char *input, t_env *env, t_mini *mini);
 void	exec_builtin(t_mini *mini, t_env *env, char **args, int cmd);
-
+/* signals */
+void    ctrl_c(int signal);
+void	ctrl_d(int signal);
 
 /* path_cmds */
 int		ft_pipex(t_mini *mini);
@@ -105,7 +107,4 @@ char	*env_path(t_env *env);
 void 	execute(t_mini *mini);
 int		cmd_path(char **command, t_mini *mini, t_env *env);
 
-/* signals */
-void    ctrl_c(int signal);
-void	ctrl_d(int signal);
 #endif

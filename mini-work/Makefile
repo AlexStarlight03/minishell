@@ -6,7 +6,7 @@
 #    By: adube <adube@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 12:35:03 by adube             #+#    #+#              #
-#    Updated: 2024/02/05 10:16:47 by adube            ###   ########.fr        #
+#    Updated: 2024/02/05 12:04:32 by adube            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ RM			=	rm -rf
 
 SRCS_DIR	=	./src/
 SRCS_LST	=	main.c \
-				signals.c \
 				builtins/cd.c \
 				builtins/echo.c \
 				builtins/env.c \
@@ -31,7 +30,8 @@ SRCS_LST	=	main.c \
 				pipex/pipex.c \
 				pipex/utils_pipex.c \
 				parsing/parse_builtins.c \
-				parsing/parse.c 
+				parsing/parse.c \
+				parsing/signals.c 
 
 SRCS		=	$(addprefix $(SRCS_DIR), $(SRCS_LST))
 
