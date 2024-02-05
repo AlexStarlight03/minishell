@@ -6,7 +6,7 @@
 #    By: adube <adube@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 12:35:03 by adube             #+#    #+#              #
-#    Updated: 2024/02/02 10:18:28 by adube            ###   ########.fr        #
+#    Updated: 2024/02/05 10:16:47 by adube            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ RM			=	rm -rf
 
 SRCS_DIR	=	./src/
 SRCS_LST	=	main.c \
+				signals.c \
 				builtins/cd.c \
 				builtins/echo.c \
 				builtins/env.c \
@@ -79,6 +80,18 @@ readline :
 		rm -rf ../$(LIBRLINE); \
 		echo "----------------------- Readline succesfully configured ✅ -----------------------\n"; \
 	fi
+
+readline history :
+		@if [ ! -f ./lib/readline/libreadlinehistory.a ]; then \
+		curl -O https://ftp.gnu.org/gnu/readline/$(LIBRLINE).tar.gz; \
+		tar -xf $(LIBRLINE).tar.gz; \
+		rm -rf $(LIBRLINE).tar.gz; \
+		cd $(LIBRLINE) && bash configure && make; \
+		mv ./libreadline.a ../lib/readline; \
+		rm -rf ../$(LIBRLINE); \
+		echo "----------------------- Readline succesfully configured ✅ -----------------------\n"; \
+	fi
+
 	
 clean:
 				@make -C $(LIBFT_DIR) clean

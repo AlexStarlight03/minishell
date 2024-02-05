@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2024/02/02 10:18:03 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/05 10:22:53 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@
 # include <signal.h>
 # include <sys/types.h>
 # include <readline/readline.h>
-# include <readline/history.h>
+//# include <readline/history.h>   le .h de history ne compile pas, va devoir le rajouter manuellement dans makefile!!!
+# include <sys/ioctl.h>
+// # include <termios.h>
+
+
 
 # define CD 10
 # define ECHO 11
@@ -101,4 +105,7 @@ char	*env_path(t_env *env);
 void 	execute(t_mini *mini);
 int		cmd_path(char **command, t_mini *mini, t_env *env);
 
+/* signals */
+void    ctrl_c(int signal);
+void	ctrl_d(int signal);
 #endif

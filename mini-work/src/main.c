@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:02:17 by adube             #+#    #+#             */
-/*   Updated: 2024/02/02 09:58:03 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/05 12:00:31 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	take_input(char *str, t_mini *mini)
 	getcwd(cwd, sizeof(cwd));
 	ft_strlcat(cwd, " % ", 1024);
 	buf = readline(cwd);
-	if (ft_strlen(buf) != 0) 
+	if (buf)  //ft_strlen(buf) != 0
 	{
 		add_history(buf);
 		ft_strcpy(str, buf);
@@ -33,7 +33,10 @@ int	take_input(char *str, t_mini *mini)
 		return (0);
 	}
 	else
+	{
+		ctrl_d(0);
 		return (1);
+	}
 }
 t_env	*ft_init_env(t_mini *mini, char **envp)
 {
@@ -71,12 +74,10 @@ int	main(int argc, char **argv, char **envp)
 	t_env	*env;
 
 	(void)argv;
-	if (argc != 1)
-	{
-		//error_function;
-		exit(127);
-	}
+	(void)argc;
 	env = ft_init_env(&mini, envp);
+	signal(SIGINT, ctrl_c);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		//pipex(argc, argv, envp);
