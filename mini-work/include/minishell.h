@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2024/02/06 12:08:43 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/06 14:27:20 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,15 @@ typedef struct s_tokens
 	t_toktype	token;
 	char		*data;
 }				t_tokens;
+
+typedef struct s_delete
+{
+	char			*output;
+	char			*str;
+	int				index_i;
+	int				index_j;
+	int				temp;
+}					t_delete;
 
 typedef struct s_env
 {
