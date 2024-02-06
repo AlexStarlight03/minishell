@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2024/02/05 12:02:25 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/06 12:08:43 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define BUFFER_SIZE 65535
 
+# define READLINE_LIBRARY
 # include "../lib/libft42/libft.h"
 # include <stdlib.h>
 # include <stdbool.h>
@@ -28,9 +29,17 @@
 # include <errno.h>
 # include <signal.h>
 # include <sys/types.h>
-# include <readline/readline.h>
-//# include <readline/history.h>   le .h de history ne compile pas, va devoir le rajouter manuellement dans makefile!!!
 # include <sys/ioctl.h>
+# include "readline.h"
+# include "history.h"
+# include "chardefs.h"
+# include "keymaps.h"
+# include "rlstdc.h"
+# include "rltypedefs.h"
+# include "tilde.h"
+# include <readline/readline.h>
+# include <readline/history.h> 
+
 // # include <termios.h>
 
 
@@ -87,6 +96,7 @@ int		ft_pwd(void);
 bool	ft_unset(t_mini *mini, char **cmd);
 char	*get_var_name(char *dest, char *src);
 int		check_env(t_env *env, char *args);
+char	*env_str(t_env *list);
 bool	env_add_back(t_env *env, char *str);
 void	free_lst_node(t_mini *mini, t_env *env);
 
@@ -104,7 +114,7 @@ int		check_error(int return_value, char *message);
 void	free_table(char *str, char **tab);
 char	*find_cmd(char *cmd, t_env *env);
 char	*env_path(t_env *env);
-void 	execute(t_mini *mini);
+int		execute(char *path, char **args, t_env *env);
 int		cmd_path(char **command, t_mini *mini, t_env *env);
 
 #endif

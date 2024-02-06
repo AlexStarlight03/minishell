@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 11:32:11 by mchampag          #+#    #+#             */
-/*   Updated: 2024/02/02 10:17:52 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/06 12:16:40 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,16 @@ static char	*valid_env(char *command, t_env *env)
 
 int	cmd_path(char **command, t_mini *mini, t_env *env)
 {
+	int i;
+	i = 0;
 	mini->command = command;
 	mini->path = find_path(mini->command[0], valid_env(command[0], env));
+	printf("%s", mini->path);
 	if (mini->command && mini->path)
 		return (0); //put error returns
-	return (-1);
+	else
+	{
+		// printf("%s", "error with path and command");
+		return (-1);
+	}
 }

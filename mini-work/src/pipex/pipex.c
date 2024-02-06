@@ -6,48 +6,60 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:11:40 by mchampag          #+#    #+#             */
-/*   Updated: 2024/02/02 11:00:03 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/06 12:16:51 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-//new function, sera peut-etre a modifier
-char	**env_exec(t_env *env)
+int			execute(char *path, char **args, t_env *env)
 {
-	char **new_env;
-	int	i;
+	char	**env_tab;
+	char	*arrayenv;
+	int		pid;
+	int		ret;
 
-	i = 0;
-	new_env = malloc(sizeof(char *));
-	while(env->next != NULL)
+	ret = 0;
+	pid = fork();
+	if (pid == 0)	
 	{
-		new_env[i] = env->content;
-		env = env->next;
-		i++;
+		arrayenv = env_str(env);
+		env_tab = ft_split(arrayenv, '\n');
+		ft_memdel(arrayenv);
+		if (ft_strchr(path, '/') != NULL)
+			execve(path, args, env_tab);
+		exit(ret);
 	}
-	if (env->next->content)
-		new_env[i] = env->next->content;
-	return(new_env);
+	else
+		waitpid(pid, &ret, 0);
+	ret = (ret == 32256 || ret == 32512) ? ret / 256 : !!ret;
+	return (ret);
 }
 
-void execute(t_mini *mini)
-{
-	//FAIRE FONCTION POUR AVOIR ENV EN CHAR **
-	char **env;
-	env = env_exec(mini->env);
-	execve(mini->path, mini->command, env); //put error returns
-	free_table(mini->path, mini->command);
-}
+// void execute(t_mini *mini, int *fd)
+// {
+// 	char *envstr;
+// 	char **env_tab;
+// 	int error;
+	
+// 	envstr = env_str(mini->env);
+// 	env_tab = ft_split(envstr, '\n');
+// 	close(fd[0]);
+// 	dup2(fd[1], 0);
+// 	error = execve(mini->path, mini->command, env_tab); //put error returns
+// 	if (error == -1)
+// 		printf("%s\n", "execve error");
+// 	//free_table(mini->path, mini->command);
+// 	//free_table(envstr, 0);
+// 	close(fd[1]);
+// }
 
-static void	child_process(int *fd, t_mini *mini)
-{
-	close(fd[0]);
-	check_error(dup2(fd[1], STDOUT_FILENO), "Child fd[1] dup2() error");
-	execute(mini);
-	close(fd[1]);
-	//check_error(-1, "execve error");
-}
+//  static void	child_process(int *fd, t_mini *mini)
+// {
+//  	check_error(dup2(fd[1], STDIN_FILENO), "Child fd[1] dup2() error");
+//  	execute(mini, fd);
+//  	check_error(-1, "execve error");
+// }
 
 // static void	parent_process(char *command2, int *fd, t_env *env)
 // {
@@ -60,16 +72,16 @@ static void	child_process(int *fd, t_mini *mini)
 
 int	ft_pipex(t_mini *mini)
 {
-	int		fd[2];
-	pid_t	pid;
+	// int		fd[2];
+	// pid_t	pid;
 
-
-	check_error(pipe(fd), "Pipe error");
-	pid = fork();
-	check_error((int)pid, "Fork error");
-	if (pid == 0)
-		child_process(fd, mini);
-	check_error(waitpid(pid, 0, 0), "waitpid error");
+	execute(mini->path, mini->command, mini->env);
+	// check_error(pipe(fd), "Pipe error");
+	// pid = fork();
+	// check_error((int)pid, "Fork error");
+	
+	// child_process(fd, mini);
+//	check_error(waitpid(pid, 0, 0), "waitpid error");
 //	if (argv[2] != NULL)
 //		parent_process(argv[2], fd, env);
 	return (0);
