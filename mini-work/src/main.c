@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:02:17 by adube             #+#    #+#             */
-/*   Updated: 2024/02/06 12:14:11 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/07 17:29:57 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 
-int	take_input(char *str, t_mini *mini)
+static int	take_input(char *str, t_mini *mini)
 {
 	char	*buf;
 	//char	**args;
@@ -23,7 +23,7 @@ int	take_input(char *str, t_mini *mini)
 	env = mini->env;
 	getcwd(cwd, sizeof(cwd));
 	ft_strlcat(cwd, " % ", 1024);
-	buf = readline(cwd);
+	buf = readline(cwd); // remplacer par GNL?
 	if (buf)  //ft_strlen(buf) != 0
 	{
 		add_history(buf);
@@ -38,16 +38,14 @@ int	take_input(char *str, t_mini *mini)
 		return (1);
 	}
 }
-t_env	*ft_init_env(t_mini *mini, char **envp)
+static t_env	*init_env(t_mini *mini, char **envp)
 {
 	t_env	*env;
 	t_env	*new;
 	int		i;
 
 	env = malloc(sizeof(t_env));
-	if (env == NULL)
-		return (NULL);
-	if (envp[0] == NULL)
+	if (env == NULL || envp[0] == NULL)
 		return (NULL);
 	env->content = ft_strdup(envp[0]);
 	env->next = NULL;
@@ -75,7 +73,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argv;
 	(void)argc;
-	env = ft_init_env(&mini, envp);
+	env = init_env(&mini, envp);
 	signal(SIGINT, ctrl_c);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
