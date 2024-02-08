@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:02:17 by adube             #+#    #+#             */
-/*   Updated: 2024/02/08 10:40:03 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/08 11:16:37 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static t_env	*init_env(t_mini *mini, char **envp)
 	// free(new->content);
 	// free(new->next->content);
 	// free(new);
-//	mini->env = env;
+	//	mini->env = env;
 	return (env);
 }
 

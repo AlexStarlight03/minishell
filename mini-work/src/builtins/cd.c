@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:12 by adube             #+#    #+#             */
-/*   Updated: 2024/02/02 10:44:00 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/08 12:04:48 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,18 @@ void	change_oldpwd(t_env *env)
 	ft_memdel(oldpwd);
 }
 
+void	change_pwd(t_env *env)
+{
+	char	cwd[1024];
+	char	*currentpath;
+	
+	getcwd(cwd, 1024);
+	currentpath = ft_strjoin("PWD=", cwd);
+	if (check_env(env, currentpath ) != 0)
+		env_add_back(env, currentpath );
+	ft_memdel(currentpath );
+}
+
 int	path_move(int dest, t_env *env)
 {
 	int		ret;
@@ -63,6 +75,7 @@ int	path_move(int dest, t_env *env)
 	}
 	ret = chdir(env_path);
 	ft_memdel(env_path);
+	change_pwd(env);
 	return (ret);
 }
 
@@ -70,7 +83,7 @@ int	cd(t_env *env, char **args)
 {
 	int	ret;
 
-	if (!args[1])
+	if (args[1] == NULL)
 	{
 		ret = path_move(0, env);
 		return (ret);
@@ -79,6 +92,7 @@ int	cd(t_env *env, char **args)
 	{
 		change_oldpwd(env);
 		ret = chdir(args[1]);
+		change_pwd(env);
 		if (ret != 0)
 			return (1);
 			//error function;

@@ -6,7 +6,7 @@
 #    By: adube <adube@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 12:35:03 by adube             #+#    #+#              #
-#    Updated: 2024/02/06 09:44:53 by adube            ###   ########.fr        #
+#    Updated: 2024/02/08 11:51:00 by adube            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ OBJS		=	$(addprefix $(OBJS_DIR), $(OBJS_LST))
 
 
 #COMMANDS
-all : dir readline $(NAME)
+all : dir $(NAME)
 
 $(NAME) : 	$(OBJS)
 			@make -C $(LIBFT_DIR)
@@ -80,30 +80,7 @@ readline :
 		rm -rf ../$(LIBRLINE); \
 		echo "----------------------- Readline succesfully configured ✅ -----------------------\n"; \
  	fi
-		
-		
-# 		@if [ ! -f ./lib/readline/libreadline.a ]; then \
-# 		curl -O https://ftp.gnu.org/gnu/readline/$(LIBRLINE).tar.gz; \
-# 		tar -xf $(LIBRLINE).tar.gz; \
-# 		rm -rf $(LIBRLINE).tar.gz; \
-# 		cd $(LIBRLINE) && bash configure && make; \
-# 		mv ./libreadline.a ../lib/readline; \
-# 		rm -rf ../$(LIBRLINE); \
-# 		echo "----------------------- Readline succesfully configured ✅ -----------------------\n"; \
-# 	fi
 
-# readline history :
-# 		@if [ ! -f ./lib/readline/libreadlinehistory.a ]; then \
-# 		curl -O https://ftp.gnu.org/gnu/readline/$(LIBRLINE).tar.gz; \
-# 		tar -xf $(LIBRLINE).tar.gz; \
-# 		rm -rf $(LIBRLINE).tar.gz; \
-# 		cd $(LIBRLINE) && bash configure && make; \
-# 		mv ./libreadline.a ../lib/readline; \
-# 		rm -rf ../$(LIBRLINE); \
-# 		echo "----------------------- Readline succesfully configured ✅ -----------------------\n"; \
-# 	fi
-
-	
 clean:
 				@make -C $(LIBFT_DIR) clean
 				@$(RM) $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)builtins $(OBJS_DIR)pipex

@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:11:40 by mchampag          #+#    #+#             */
-/*   Updated: 2024/02/06 12:16:51 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/08 11:56:41 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int			execute(char *path, char **args, t_env *env)
 		ft_memdel(arrayenv);
 		if (ft_strchr(path, '/') != NULL)
 			execve(path, args, env_tab);
+		free_table(NULL, env_tab);
 		exit(ret);
 	}
 	else
@@ -76,6 +77,7 @@ int	ft_pipex(t_mini *mini)
 	// pid_t	pid;
 
 	execute(mini->path, mini->command, mini->env);
+	free_table(mini->path, mini->command);
 	// check_error(pipe(fd), "Pipe error");
 	// pid = fork();
 	// check_error((int)pid, "Fork error");
