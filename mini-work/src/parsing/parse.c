@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:47:19 by adube             #+#    #+#             */
-/*   Updated: 2024/02/06 14:18:54 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/08 09:26:50 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ char	*analyze(char *args)
 void	parse(char *input, t_env *env, t_mini *mini)
 {
 	int		cmd;
-	char	*args;
+	char	**args;
 	int		i;
 	int		j;
 	
 	j = 0;
 	i = 0;
-	//args = ft_split(input, ' ');
-	args = ft_strtrim(input, " ");
+	args = ft_split(input, ' ');
+	//args = ft_strtrim(input, " ");
 	while (args[i])
 	{
 		args[i] = analyze(args[i]);
@@ -80,8 +80,4 @@ void	parse(char *input, t_env *env, t_mini *mini)
 		cmd_path(args, mini, env);
 		ft_pipex(mini);
 	}
-	//printf("%s\n", command);
-	//if (command != NULL)
-	//	execve(command, args, 0); //passer notre env comme du monde
-//	return ;
 }

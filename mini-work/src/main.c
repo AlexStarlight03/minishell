@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:02:17 by adube             #+#    #+#             */
-/*   Updated: 2024/02/07 17:29:57 by mchampag         ###   ########.fr       */
+/*   Updated: 2024/02/08 10:40:03 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,13 @@
 static int	take_input(char *str, t_mini *mini)
 {
 	char	*buf;
-	//char	**args;
 	t_env	*env;
 	char	cwd[1024];
 	
 	env = mini->env;
 	getcwd(cwd, sizeof(cwd));
 	ft_strlcat(cwd, " % ", 1024);
-	buf = readline(cwd); // remplacer par GNL?
+	buf = readline(cwd);
 	if (buf)  //ft_strlen(buf) != 0
 	{
 		add_history(buf);
@@ -50,8 +49,8 @@ static t_env	*init_env(t_mini *mini, char **envp)
 	env->content = ft_strdup(envp[0]);
 	env->next = NULL;
 	mini->env = env;
-	i = 1;
-	while (envp && envp[i])
+	i = 0;
+	while (envp && envp[++i])
 	{
 		new = malloc(sizeof(t_env));
 		if (new == NULL)
@@ -60,8 +59,11 @@ static t_env	*init_env(t_mini *mini, char **envp)
 		new->next = NULL;
 		env->next = new;
 		env = new;
-		i++;
 	}
+	// free(new->content);
+	// free(new->next->content);
+	// free(new);
+//	mini->env = env;
 	return (env);
 }
 

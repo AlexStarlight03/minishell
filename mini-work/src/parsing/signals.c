@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 09:26:31 by adube             #+#    #+#             */
-/*   Updated: 2024/02/06 09:55:55 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/08 09:21:56 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void    ctrl_c(int signal)
 {
     (void)signal;
 	printf("\n");
-	rl_replace_line("", 0);
+	rl_replace_line(" ", 0); // why is it not working, a regler
 	rl_on_new_line();
 	rl_redisplay();
 }
