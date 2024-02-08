@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:02:17 by adube             #+#    #+#             */
-/*   Updated: 2024/02/08 10:40:03 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/08 11:56:59 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static int	take_input(char *str, t_mini *mini)
 		ft_strcpy(str, buf);
 		//tokenize the str into tken (tableaux pour envoyer aux commandes), split seulement pour tester cmds
 		parse(str, env, mini);
+		printf("\n %s \n", strerror(errno));
+		printf("\n %d \n", errno);
 		return (0);
 	}
 	else

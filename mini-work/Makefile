@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adube <adube@student.42.fr>                +#+  +:+       +#+         #
+#    By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 12:35:03 by adube             #+#    #+#              #
-#    Updated: 2024/02/06 09:44:53 by adube            ###   ########.fr        #
+#    Updated: 2024/02/08 11:52:13 by mchampag         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,8 @@ OBJS		=	$(addprefix $(OBJS_DIR), $(OBJS_LST))
 
 
 #COMMANDS
-all : dir readline $(NAME)
+# all : dir readline $(NAME)
+all : dir $(NAME)
 
 $(NAME) : 	$(OBJS)
 			@make -C $(LIBFT_DIR)

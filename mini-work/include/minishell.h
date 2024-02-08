@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2024/02/06 14:27:20 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/08 11:43:00 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,10 @@
 # include "rltypedefs.h"
 # include "tilde.h"
 # include <readline/readline.h>
-# include <readline/history.h> 
+# include <readline/history.h>
+# include <errno.h>
 
 // # include <termios.h>
-
-
 
 # define CD 10
 # define ECHO 11
@@ -51,6 +50,8 @@
 # define EXPORT 14
 # define PWD 15
 # define UNSET 16
+
+int		ERROR;
 
 typedef enum e_toktype
 {
