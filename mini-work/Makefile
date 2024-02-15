@@ -6,7 +6,7 @@
 #    By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 12:35:03 by adube             #+#    #+#              #
-#    Updated: 2024/02/14 20:51:21 by mchampag         ###   ########.fr        #
+#    Updated: 2024/02/14 23:59:53 by mchampag         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,13 +26,16 @@ SRCS_LST	=	main.c \
 				builtins/export.c \
 				builtins/pwd.c \
 				builtins/unset.c \
-				pipex/parse_paths.c \
+				builtins/utils_1.c \
+				builtins/utils_2.c \
+				parsing/parse_builtins.c \
+				parsing/parse_paths.c \
+				parsing/parse.c \
+				parsing/quotes.c \
 				pipex/pipex.c \
 				pipex/utils_pipex.c \
-				parsing/parse_builtins.c \
-				parsing/parse.c \
-				parsing/signals.c \
-				parsing/header.c
+				utils/header.c \
+				utils/signals.c
 
 SRCS		=	$(addprefix $(SRCS_DIR), $(SRCS_LST))
 
@@ -69,7 +72,7 @@ run: 	all
 		@./$(NAME)
 
 dir :
-		@mkdir -p $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)builtins $(OBJS_DIR)pipex
+		@mkdir -p $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)builtins $(OBJS_DIR)pipex $(OBJS_DIR)utils
 		@mkdir -p $(LIBRLINE_DIR)
 
 readline :
@@ -108,7 +111,7 @@ readline :
 	
 clean:
 				@make -C $(LIBFT_DIR) clean
-				@$(RM) $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)builtins $(OBJS_DIR)pipex
+				@$(RM) $(OBJS_DIR) $(OBJS_DIR)parsing $(OBJS_DIR)builtins $(OBJS_DIR)pipex $(OBJS_DIR)utils
 				@echo -e "object deleted!"
 
 fclean:			clean

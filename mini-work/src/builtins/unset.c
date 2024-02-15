@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:27 by adube             #+#    #+#             */
-/*   Updated: 2024/02/02 09:47:08 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/14 22:28:21 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-size_t	name_len(char *env)
+static size_t	name_len(char *env)
 {
 	size_t	i;
 
@@ -20,19 +20,6 @@ size_t	name_len(char *env)
 	while (env[i] && env[i] != '=')
 		i++;
 	return (i);
-}
-
-void	free_lst_node(t_mini *mini, t_env *env)
-{
-	if (mini->env == env && env->next != NULL)
-	{
-		ft_memdel(mini->env->content);
-		mini->env->content = NULL;
-		mini->env->next = NULL;
-		return ;
-	}
-	ft_memdel(env->content);
-	ft_memdel((char *)env);
 }
 
 bool	ft_unset(t_mini *mini, char **cmd)

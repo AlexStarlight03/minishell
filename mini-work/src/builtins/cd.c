@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:12 by adube             #+#    #+#             */
-/*   Updated: 2024/02/02 10:44:00 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/14 22:21:36 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-char	*get_path(t_env *env, char *var_name, int len)
+
+static char	*get_path(t_env *env, char *var_name, int len)
 {
 	char	env_name[1024];
 	char	*path;
@@ -35,7 +36,7 @@ char	*get_path(t_env *env, char *var_name, int len)
 
 ///PWD in ENV DOESNT CHANGE WHEN WE MOVE WITH CD! NEEDS TO BE FIXED
 
-void	change_oldpwd(t_env *env)
+static void	change_oldpwd(t_env *env)
 {
 	char	cwd[1024];
 	char	*oldpwd;
@@ -47,7 +48,7 @@ void	change_oldpwd(t_env *env)
 	ft_memdel(oldpwd);
 }
 
-int	path_move(int dest, t_env *env)
+static int	path_move(int dest, t_env *env)
 {
 	int		ret;
 	char	*env_path;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:31:00 by adube             #+#    #+#             */
-/*   Updated: 2024/02/02 09:40:56 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/14 23:11:09 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	exec_builtin(t_mini *mini, t_env *env, char **args, int cmd)
 		ft_pwd();
 }
 
-char	*make_lower(char *arg)
+static char	*make_lower(char *arg)
 {
 	char	*newstr;
 	char	new;

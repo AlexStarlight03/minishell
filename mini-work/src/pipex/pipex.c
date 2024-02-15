@@ -6,13 +6,13 @@
 /*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:11:40 by mchampag          #+#    #+#             */
-/*   Updated: 2024/02/08 11:45:26 by mchampag         ###   ########.fr       */
+/*   Updated: 2024/02/14 23:16:45 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int			execute(char *path, char **args, t_env *env)
+static int			execute(char *path, char **args, t_env *env)
 {
 	char	**env_tab;
 	char	*arrayenv;

@@ -6,7 +6,7 @@
 /*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2024/02/14 21:27:48 by mchampag         ###   ########.fr       */
+/*   Updated: 2024/02/14 23:56:32 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,7 @@ typedef struct s_mini
 	char			**command;
 }				t_mini;
 
-/* Main */
-int		main(int argc, char **argv, char **envp);
-
-/* Builtins */
+/* BUILTINS */
 int		cd(t_env *env, char **args);
 void	ft_echo(char **args);
 int		ft_env(t_env *env);
@@ -113,30 +110,36 @@ void	ft_exit(t_mini *mini, t_env *env);
 int		ft_export(char **cmd, t_env *env);
 int		ft_pwd(void);
 bool	ft_unset(t_mini *mini, char **cmd);
-char	*get_var_name(char *dest, char *src);
-int		check_env(t_env *env, char *args);
-char	*env_str(t_env *list);
-bool	env_add_back(t_env *env, char *str);
+/* utils_1 */
 void	free_lst_node(t_mini *mini, t_env *env);
+t_env	*lstsecondlast(t_env *lst);
+char	*get_var_name(char *dest, char *src);
+/* utils_2 */ 
+char	*env_str(t_env *list);
+int		check_env(t_env *env, char *args);
+bool	env_add_back(t_env *env, char *str);
 
-/* Parsing */
+/* PARSING */
 int		is_a_builtin(char **args);
 void	parser(char *input, t_env *env, t_mini *mini);
 void	exec_builtin(t_mini *mini, t_env *env, char **args, int cmd);
-/* signals */
-void    ctrl_c(int signal);
-void	ctrl_d(int signal);
-
+char	*quote_checker(char quote_type, char *arg);
 /* path_cmds */
+char	*find_cmd(char *cmd, t_env *env);
+char	*env_path(t_env *env);
+int		cmd_path(char **command, t_mini *mini, t_env *env);
+
+/* PIPEX */
 int		ft_pipex(t_mini *mini);
 int		check_error(int return_value, char *message);
 void	free_table(char *str, char **tab);
-char	*find_cmd(char *cmd, t_env *env);
-char	*env_path(t_env *env);
-int		execute(char *path, char **args, t_env *env);
-int		cmd_path(char **command, t_mini *mini, t_env *env);
 
-/* utils */
+/* UTILS */
+void    ctrl_c(int signal);
+void	ctrl_d(int signal);
 void    header(void);
+
+/* MAIN */
+int		main(int argc, char **argv, char **envp);
 
 #endif
