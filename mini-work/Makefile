@@ -6,7 +6,7 @@
 #    By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 12:35:03 by adube             #+#    #+#              #
-#    Updated: 2024/02/08 11:52:13 by mchampag         ###   ########.fr        #
+#    Updated: 2024/02/14 20:51:21 by mchampag         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SRCS_LST	=	main.c \
 				pipex/utils_pipex.c \
 				parsing/parse_builtins.c \
 				parsing/parse.c \
-				parsing/signals.c 
+				parsing/signals.c \
+				parsing/header.c
 
 SRCS		=	$(addprefix $(SRCS_DIR), $(SRCS_LST))
 

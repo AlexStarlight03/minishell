@@ -6,7 +6,7 @@
 /*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2024/02/08 11:43:00 by mchampag         ###   ########.fr       */
+/*   Updated: 2024/02/14 21:27:48 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,15 @@
 # define EXPORT 14
 # define PWD 15
 # define UNSET 16
+
+# define NON  "\x1B[0m"
+# define RED  "\x1B[31m"
+# define GRN  "\x1B[32m"
+# define YEL  "\x1B[33m"
+# define BLU  "\x1B[34m"
+# define MAG  "\x1B[35m"
+# define CYN  "\x1B[36m"
+# define WHT  "\x1B[37m"
 
 int		ERROR;
 
@@ -112,7 +121,7 @@ void	free_lst_node(t_mini *mini, t_env *env);
 
 /* Parsing */
 int		is_a_builtin(char **args);
-void	parse(char *input, t_env *env, t_mini *mini);
+void	parser(char *input, t_env *env, t_mini *mini);
 void	exec_builtin(t_mini *mini, t_env *env, char **args, int cmd);
 /* signals */
 void    ctrl_c(int signal);
@@ -126,5 +135,8 @@ char	*find_cmd(char *cmd, t_env *env);
 char	*env_path(t_env *env);
 int		execute(char *path, char **args, t_env *env);
 int		cmd_path(char **command, t_mini *mini, t_env *env);
+
+/* utils */
+void    header(void);
 
 #endif

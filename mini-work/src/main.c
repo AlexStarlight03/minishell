@@ -6,7 +6,7 @@
 /*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:02:17 by adube             #+#    #+#             */
-/*   Updated: 2024/02/08 11:56:59 by mchampag         ###   ########.fr       */
+/*   Updated: 2024/02/14 20:45:00 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	take_input(char *str, t_mini *mini)
 		add_history(buf);
 		ft_strcpy(str, buf);
 		//tokenize the str into tken (tableaux pour envoyer aux commandes), split seulement pour tester cmds
-		parse(str, env, mini);
+		parser(str, env, mini);
 		printf("\n %s \n", strerror(errno));
 		printf("\n %d \n", errno);
 		return (0);
@@ -80,6 +80,7 @@ int	main(int argc, char **argv, char **envp)
 	env = init_env(&mini, envp);
 	signal(SIGINT, ctrl_c);
 	signal(SIGQUIT, SIG_IGN);
+	header();
 	while (1)
 	{
 		if (take_input(inputstr, &mini))

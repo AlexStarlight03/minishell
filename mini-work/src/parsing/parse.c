@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:47:19 by adube             #+#    #+#             */
-/*   Updated: 2024/02/08 09:26:50 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/14 20:24:27 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*analyze(char *args)
 	return (args);
 }
 
-void	parse(char *input, t_env *env, t_mini *mini)
+void	parser(char *input, t_env *env, t_mini *mini)
 {
 	int		cmd;
 	char	**args;
