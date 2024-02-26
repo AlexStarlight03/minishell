@@ -6,7 +6,7 @@
 /*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 23:50:29 by mchampag          #+#    #+#             */
-/*   Updated: 2024/02/14 23:57:28 by mchampag         ###   ########.fr       */
+/*   Updated: 2024/02/22 21:40:46 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ char	*quote_checker(char quote_type, char *arg)
 	int		len;
 	int		i;
 
-	len = (int)strlen(arg) - 1;
+	len = (int)ft_strlen(arg);
+	printf("%d\n", len);
+	printf("%s\n", arg);
 	i = 0;
 	while(arg[i] != '\0' && arg[i] != quote_type)
 		i++;
@@ -46,3 +48,14 @@ char	*quote_checker(char quote_type, char *arg)
 		arg = arg_no_quote(arg, i, len);
 	return (arg);
 }
+
+
+// ➜  ~ ''
+// zsh: permission denied:
+// ➜  ~ ' '
+// zsh: command not found:
+// ➜  ~ " "
+// zsh: command not found:
+// ➜  ~ ""
+// zsh: permission denied:
+

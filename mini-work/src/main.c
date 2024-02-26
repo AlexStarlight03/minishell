@@ -6,12 +6,11 @@
 /*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:02:17 by adube             #+#    #+#             */
-/*   Updated: 2024/02/14 20:45:00 by mchampag         ###   ########.fr       */
+/*   Updated: 2024/02/25 22:02:50 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
 
 static int	take_input(char *str, t_mini *mini)
 {
@@ -29,8 +28,8 @@ static int	take_input(char *str, t_mini *mini)
 		ft_strcpy(str, buf);
 		//tokenize the str into tken (tableaux pour envoyer aux commandes), split seulement pour tester cmds
 		parser(str, env, mini);
-		printf("\n %s \n", strerror(errno));
-		printf("\n %d \n", errno);
+		// printf("\n %s \n", strerror(errno));
+		// printf("\n %d \n", errno);
 		return (0);
 	}
 	else
@@ -39,6 +38,16 @@ static int	take_input(char *str, t_mini *mini)
 		return (1);
 	}
 }
+
+static void	prompt(t_mini mini, char *inputstr)
+{
+	while (1)
+	{
+		if (take_input(inputstr, &mini))
+			continue ;
+	}
+}
+
 static t_env	*init_env(t_mini *mini, char **envp)
 {
 	t_env	*env;
@@ -62,29 +71,26 @@ static t_env	*init_env(t_mini *mini, char **envp)
 		env->next = new;
 		env = new;
 	}
-	// free(new->content);
-	// free(new->next->content);
-	// free(new);
-//	mini->env = env;
 	return (env);
+}
+
+static void signals_activation(void)
+{
+	signal(SIGINT, ctrl_c);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
-	char	inputstr[1024];
-	t_mini	mini;
 	t_env	*env;
-
+	t_mini	mini;
+	char	inputstr[1024];
+	
 	(void)argv;
 	(void)argc;
-	env = init_env(&mini, envp);
-	signal(SIGINT, ctrl_c);
-	signal(SIGQUIT, SIG_IGN);
+	signals_activation();
 	header();
-	while (1)
-	{
-		if (take_input(inputstr, &mini))
-			continue ;
-	}
+	env = init_env(&mini, envp);
+	prompt(mini, inputstr);
 	return (0);
 }
