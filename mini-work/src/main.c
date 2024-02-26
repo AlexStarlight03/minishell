@@ -6,45 +6,48 @@
 /*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:02:17 by adube             #+#    #+#             */
-/*   Updated: 2024/02/25 22:02:50 by mchampag         ###   ########.fr       */
+/*   Updated: 2024/02/25 23:02:47 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int	take_input(char *str, t_mini *mini)
+static bool	input_checker(char *buf)
+{
+	if (!*buf || !buf)
+		return (false);
+	return(true);	
+}
+
+static bool	readline_input(t_mini *mini, char *input)
 {
 	char	*buf;
 	t_env	*env;
 	char	cwd[1024];
-	
+
 	env = mini->env;
 	getcwd(cwd, sizeof(cwd));
 	ft_strlcat(cwd, " % ", 1024);
 	buf = readline(cwd);
-	if (buf)  //ft_strlen(buf) != 0
+	if (input_checker(buf))  // double prompt affiche si ' '
 	{
 		add_history(buf);
-		ft_strcpy(str, buf);
-		//tokenize the str into tken (tableaux pour envoyer aux commandes), split seulement pour tester cmds
-		parser(str, env, mini);
-		// printf("\n %s \n", strerror(errno));
-		// printf("\n %d \n", errno);
-		return (0);
+		ft_strcpy(input, buf);
+		parser(input, env, mini);
+		return (true);
 	}
-	else
-	{
-		ctrl_d(0);
-		return (1);
-	}
+	buf = NULL;
+	return (false);
 }
 
-static void	prompt(t_mini mini, char *inputstr)
+static void	minishell_prompt(t_mini mini, char *input)
 {
 	while (1)
 	{
-		if (take_input(inputstr, &mini))
+		if (readline_input(&mini, input))
 			continue ;
+		else
+			ctrl_c(100);
 	}
 }
 
@@ -74,23 +77,17 @@ static t_env	*init_env(t_mini *mini, char **envp)
 	return (env);
 }
 
-static void signals_activation(void)
-{
-	signal(SIGINT, ctrl_c);
-	signal(SIGQUIT, SIG_IGN);
-}
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_env	*env;
 	t_mini	mini;
-	char	inputstr[1024];
+	char	input[1024];
 	
 	(void)argv;
 	(void)argc;
 	signals_activation();
 	header();
 	env = init_env(&mini, envp);
-	prompt(mini, inputstr);
+	minishell_prompt(mini, input);
 	return (0);
 }

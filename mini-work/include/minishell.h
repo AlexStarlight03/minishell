@@ -6,7 +6,7 @@
 /*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2024/02/22 22:00:43 by mchampag         ###   ########.fr       */
+/*   Updated: 2024/02/25 22:08:37 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ void	free_table(char *str, char **tab);
 /* UTILS */
 void    ctrl_c(int signal);
 void	ctrl_d(int signal);
+void	signals_activation(void);
 void    header(void);
 
 /* MAIN */
