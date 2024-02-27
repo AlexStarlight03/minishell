@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2024/02/06 14:27:20 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/27 14:04:45 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,35 @@
 # define PWD 15
 # define UNSET 16
 
-typedef enum e_toktype
-{
-	TOK_ERROR,
-	TOK_WORD,
-	TOK_SPACE,
-	TOK_DIGIT,
-	TOK_OPERATOR,
-	TOK_REDIRECTION,
-}	t_toktype;
+# define STDIN 0
+# define STDOUT 1
+# define STDERR 2
+
+# define EMPTY 0
+# define CMD 1
+# define ARG 2
+# define TRUNC 3
+# define APPEND 4
+# define INPUT 5
+# define PIPE 6
+# define END 7
+
+// typedef enum e_toktype
+// {
+// 	TOK_ERROR,
+// 	TOK_WORD,
+// 	TOK_SPACE,
+// 	TOK_DIGIT,
+// 	TOK_OPERATOR,
+// 	TOK_REDIRECTION,
+// }	t_toktype;
 
 typedef struct s_tokens
 {
-	t_toktype	token;
 	char		*data;
+	int			type;
+	struct s_tokens	*previous;
+	struct s_tokens	*next;
 }				t_tokens;
 
 typedef struct s_delete

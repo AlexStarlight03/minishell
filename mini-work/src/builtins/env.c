@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:19 by adube             #+#    #+#             */
-/*   Updated: 2024/02/06 11:51:28 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/27 13:28:33 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ int	ft_env(t_env *env)
 {
 	while (env && env->next != NULL)
 	{
-		ft_putendl_fd(env->content, 1);
+		ft_putendl_fd(env->content, STDOUT_FILENO);
 		env = env->next;
 	}
 	if (env)
-		ft_putendl_fd(env->content, 1);
+		ft_putendl_fd(env->content, STDOUT_FILENO);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:14:16 by adube             #+#    #+#             */
-/*   Updated: 2024/02/02 09:38:35 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/27 13:28:02 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_echo(char **args)
 		}
 		while (args[i])
 		{
-			ft_putstr_fd(args[i], 1);
+			ft_putstr_fd(args[i], STDOUT_FILENO);
 			if (args[i + 1])
 				write(1, " ", 1);
 			i++;
