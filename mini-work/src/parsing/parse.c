@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:47:19 by adube             #+#    #+#             */
-/*   Updated: 2024/02/26 10:09:21 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/28 15:16:15 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,11 @@ char	*analyze(char *args)
 	return (args);
 }
 
-char **arg_split(input)
+char **arg_split(char *input)
 {
 	char **args;
 	args = ft_split(input, ' ');
+	return (args);
 }
 
 void	parse(char *input, t_env *env, t_mini *mini)

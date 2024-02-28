@@ -6,7 +6,7 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 09:26:31 by adube             #+#    #+#             */
-/*   Updated: 2024/02/08 09:21:56 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/28 15:51:42 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ctrl_d(int signal)
 	(void)signal;
 	rl_clear_history();
     //free everything that needs to be freed (structs and env)
-	exit(3);
+	exit(0);
 }
 
 void    ctrl_c(int signal)
