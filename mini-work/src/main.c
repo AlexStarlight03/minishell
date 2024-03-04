@@ -6,18 +6,18 @@
 /*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:02:17 by adube             #+#    #+#             */
-/*   Updated: 2024/02/28 16:09:14 by adube            ###   ########.fr       */
+/*   Updated: 2024/03/04 09:20:24 by adube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// static bool ft_isspace(char c)
-// {
-// 	if (c == 32 || c == 9 || c == 10 || c == 11 || c == 12 || c == 13)
-// 		return (true);
-// 	return (false);
-// }
+static bool ft_isspace(char c)
+{
+	if (c == 32 || c == 9 || c == 10 || c == 11 || c == 12 || c == 13)
+		return (true);
+	return (false);
+}
 
 static int	take_input(char *str, t_mini *mini)
 {
@@ -31,15 +31,20 @@ static int	take_input(char *str, t_mini *mini)
 	getcwd(cwd, sizeof(cwd));
 	ft_strlcat(cwd, " % ", 1024);
 	buf = readline(cwd);
-	// while (buf[i] && (ft_isspace(buf[i]) == true))
-	// {
-	// 	if (buf[i + 1] == '\0')
-	// 	{
-	// 	 	ft_strlcat(cwd, " % ", 1024);
-	// 	 	return (0);
-	// 	}
-	// 	i++;
-	// }
+	if (buf == NULL)
+	{
+		ctrl_d(0);
+		return (0);
+	}
+	while (buf[i] && (ft_isspace(buf[i]) == true))
+	{
+	 	if (buf[i + 1] == '\0')
+	 	{
+		 	ft_strlcat(cwd, " % ", 1024);
+	 	 	return (0);
+		}
+		i++;
+ 	}
 	if (ft_strlen(buf) != 0)
 	{
 		add_history(buf);
@@ -48,12 +53,9 @@ static int	take_input(char *str, t_mini *mini)
 		parse(str, env, mini);
 		return (0);
 	}
-	else
-	{
-		ctrl_d(0);
-		return (1);
-	}
+	return (1);
 }
+
 static t_env	*init_env(t_mini *mini, char **envp)
 {
 	t_env	*env;
