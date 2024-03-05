@@ -6,7 +6,7 @@
 /*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2024/02/25 22:08:37 by mchampag         ###   ########.fr       */
+/*   Updated: 2024/03/04 21:54:32 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,13 @@ int		ERROR;
 
 typedef enum e_toktype
 {
-	TOK_ERROR,
-	TOK_WORD,
-	TOK_SPACE,
-	TOK_DIGIT,
+	TOK_REDIR_INPUT,
+	TOK_REDIR_OUTPUT,
+	TOK_TRUNCK,
+	TOK_APPEND,
+	TOK_PIPE,
 	TOK_OPERATOR,
-	TOK_REDIRECTION,
+	TOK_WORD,
 }	t_toktype;
 
 typedef struct s_tokens
@@ -77,6 +78,12 @@ typedef struct s_tokens
 	t_toktype	token;
 	char		*data;
 }				t_tokens;
+
+typedef struct s_slist
+{
+	void			*content;
+	struct s_slist	*next;
+}	t_slist;
 
 typedef struct s_delete
 {
@@ -118,6 +125,9 @@ char	*get_var_name(char *dest, char *src);
 char	*env_str(t_env *list);
 int		check_env(t_env *env, char *args);
 bool	env_add_back(t_env *env, char *str);
+
+/* Lexer */
+char	**tokenizer(char *input);
 
 /* PARSING */
 int		is_a_builtin(char **args);

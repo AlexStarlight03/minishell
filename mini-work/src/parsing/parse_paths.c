@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_paths.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adube <adube@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 11:32:11 by mchampag          #+#    #+#             */
-/*   Updated: 2024/02/06 12:16:40 by adube            ###   ########.fr       */
+/*   Updated: 2024/02/28 14:28:30 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	cmd_path(char **command, t_mini *mini, t_env *env)
 	i = 0;
 	mini->command = command;
 	mini->path = find_path(mini->command[0], valid_env(command[0], env));
-	printf("%s", mini->path);
+	// printf("%s", mini->path);
 	if (mini->command && mini->path)
 		return (0); //put error returns
 	else

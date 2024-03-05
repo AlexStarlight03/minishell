@@ -6,7 +6,7 @@
 /*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:47:19 by adube             #+#    #+#             */
-/*   Updated: 2024/02/22 22:58:35 by mchampag         ###   ########.fr       */
+/*   Updated: 2024/03/01 20:19:05 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static char	*analyzer(char *args)
 	return (args);
 }
 
+
+
 void	parser(char *input, t_env *env, t_mini *mini)
 {
 	int		cmd;
@@ -49,27 +51,14 @@ void	parser(char *input, t_env *env, t_mini *mini)
 	int		i;
 	int		j;
 	
-
-	// int		quote;
-	
-	i = 0;
-	// quote = 0;
-	// printf("%s", input);
-	// if (input)
-	// {
-	// 	while (*input == 32 && *input != '\n')
-	// 		input++;
-	// 	printf("%s", input);
-	// }
-	
-	// scanf(" ");
-
-
-
-		
+	i = 0;	
 	j = 0;
+	printf("avant: %s\n", input);
+	// args = ft_strtrim(input, " ");
 	args = ft_split(input, ' ');
-	//args = ft_strtrim(input, " ");
+	printf("apres: %s\n", args[0]);
+	printf("apres: %s\n", args[1]);
+	// printf("apres: %s\n", args[2]);
 	while (args[i])
 	{
 		args[i] = analyzer(args[i]);

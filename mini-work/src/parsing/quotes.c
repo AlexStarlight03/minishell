@@ -6,7 +6,7 @@
 /*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 23:50:29 by mchampag          #+#    #+#             */
-/*   Updated: 2024/02/22 21:40:46 by mchampag         ###   ########.fr       */
+/*   Updated: 2024/03/01 20:27:49 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,16 @@ char	*quote_checker(char quote_type, char *arg)
 	int		i;
 
 	len = (int)ft_strlen(arg);
-	printf("%d\n", len);
-	printf("%s\n", arg);
+	// printf("%d\n", len);
+	// printf("%s\n", arg);
 	i = 0;
 	while(arg[i] != '\0' && arg[i] != quote_type)
 		i++;
+	// printf("i: %s\n", arg + i);
+	// printf("len: %c\n", arg[len]);
 	while(arg[len] && len >= 0 && arg[len] != quote_type)
 		len--;
+	// printf("len: %s\n", arg + len);
 	if (len != i)
 		arg = arg_no_quote(arg, i, len);
 	return (arg);
