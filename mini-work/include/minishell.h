@@ -6,7 +6,7 @@
 /*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2024/03/04 21:54:32 by mchampag         ###   ########.fr       */
+/*   Updated: 2024/03/05 22:42:29 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,6 @@ typedef struct s_tokens
 	char		*data;
 }				t_tokens;
 
-typedef struct s_slist
-{
-	void			*content;
-	struct s_slist	*next;
-}	t_slist;
-
 typedef struct s_delete
 {
 	char			*output;
@@ -127,7 +121,8 @@ int		check_env(t_env *env, char *args);
 bool	env_add_back(t_env *env, char *str);
 
 /* Lexer */
-char	**tokenizer(char *input);
+char	**lexer(t_mini *mini, char *input);
+void	tokenizer(char *input, t_list **tokens);
 
 /* PARSING */
 int		is_a_builtin(char **args);

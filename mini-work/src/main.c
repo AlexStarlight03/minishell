@@ -6,7 +6,7 @@
 /*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:02:17 by adube             #+#    #+#             */
-/*   Updated: 2024/03/04 21:54:19 by mchampag         ###   ########.fr       */
+/*   Updated: 2024/03/05 20:18:11 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static bool	readline_input(t_mini *mini, char *input)
 	{
 		add_history(buf);
 		ft_strcpy(input, buf);
-		tokenizer(input);
+		lexer(mini, input);
 		// parser(input, env, mini); // if
 		return (true);
 	}
