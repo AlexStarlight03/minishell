@@ -6,7 +6,7 @@
 /*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 21:47:51 by mchampag          #+#    #+#             */
-/*   Updated: 2024/03/07 23:11:42 by mchampag         ###   ########.fr       */
+/*   Updated: 2024/03/07 23:25:41 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,8 @@ static void	create_text_token(char *input, t_list **tokens, char *start)
 
 /**
  * @brief Check if there is a text token, then to the separator token.
- * @note The ascii code of single quote is 39, and 34 is for double quote.
- * Also, 32 is for space, 9 is for horizontal tabulation, 124 for pipe,
- * 60 for < and 62 for >.
+ * @note The ascii code for space is 32, 9 is for horizontal tabulation,
+ * 124 for pipe, 60 for < and 62 for >.
  */
 
 static bool	create_separator_token(char *input, t_list **tokens, char *start)
@@ -68,7 +67,7 @@ static bool	create_separator_token(char *input, t_list **tokens, char *start)
 }
 
 /**
- * @brief Found everything between two quotes (single or double)
+ * @brief Find everything between two quotes (single or double)
  * to make a "word", including quotes.
  * @note The ascii code of single quote is 39, and 34 is for double quote.
 */

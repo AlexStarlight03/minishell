@@ -6,7 +6,7 @@
 /*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2024/03/05 22:42:29 by mchampag         ###   ########.fr       */
+/*   Updated: 2024/03/17 22:36:39 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@
 # define EXPORT 14
 # define PWD 15
 # define UNSET 16
+# define PIPE 127
+# define SYNTAX 2
 
 # define NON  "\x1B[0m"
 # define RED  "\x1B[31m"
@@ -101,6 +103,7 @@ typedef struct s_mini
 	t_env			*env;
 	char			*path;
 	char			**command;
+	int				lastexitstatus;
 }				t_mini;
 
 /* BUILTINS */
@@ -124,11 +127,20 @@ bool	env_add_back(t_env *env, char *str);
 char	**lexer(t_mini *mini, char *input);
 void	tokenizer(char *input, t_list **tokens);
 
+
 /* PARSING */
 int		is_a_builtin(char **args);
 void	parser(char *input, t_env *env, t_mini *mini);
 void	exec_builtin(t_mini *mini, t_env *env, char **args, int cmd);
 char	*quote_checker(char quote_type, char *arg);
+
+/* CLEANER */ 
+bool	exit_cleaner(t_mini *mini, t_list **tokens);
+bool	token_cleaner(t_mini *mini, t_list **tokens);
+
+/* CLEANER_UTILS */
+
+
 /* path_cmds */
 char	*find_cmd(char *cmd, t_env *env);
 char	*env_path(t_env *env);

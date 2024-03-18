@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   1_lexer.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:18:01 by mchampag          #+#    #+#             */
-/*   Updated: 2024/03/05 23:01:46 by mchampag         ###   ########.fr       */
+/*   Updated: 2024/03/14 20:39:51 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,7 @@ char	**lexer(t_mini *mini, char *input)
         return (NULL);
     tokens = NULL;
     tokenizer(input, &tokens);
+	if (token_cleaner(mini, &tokens))
+		return (NULL);
     return (NULL);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adube <adube@student.42.fr>                +#+  +:+       +#+         #
+#    By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 09:15:46 by adube             #+#    #+#              #
-#    Updated: 2024/02/01 12:38:22 by adube            ###   ########.fr        #
+#    Updated: 2024/03/17 21:18:31 by mchampag         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,10 @@ SRCS			=	ft_isalnum.c \
 					ft_lstiter.c \
 					ft_lstlast.c \
 					ft_lstmap.c \
-					ft_lstsize.c 
+					ft_lstsize.c \
+					ft_del.c \
+					ft_lstremovenode.c \
+					ft_strappend.c
 
 OBJS			= $(SRCS:.c=.o)
 
