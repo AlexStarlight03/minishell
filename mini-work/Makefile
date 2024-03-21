@@ -6,7 +6,7 @@
 #    By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 12:35:03 by adube             #+#    #+#              #
-#    Updated: 2024/03/17 22:58:49 by mchampag         ###   ########.fr        #
+#    Updated: 2024/03/17 23:01:13 by mchampag         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS_LST	=	main.c \
 				lexer/1_lexer.c \
 				lexer/2_tokenizer.c \
 				lexer/3_cleaner.c \
+				lexer/4_expander.c \
 				parsing/parse_builtins.c \
 				parsing/parse_paths.c \
 				parsing/parse.c \

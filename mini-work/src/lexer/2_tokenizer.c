@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*   2_tokenizer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 21:47:51 by mchampag          #+#    #+#             */
-/*   Updated: 2024/03/07 23:25:41 by mchampag         ###   ########.fr       */
+/*   Updated: 2024/03/18 21:59:08 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ static bool	create_separator_token(char *input, t_list **tokens, char *start)
 		|| *input == 62)
 	{
 		create_text_token(input, tokens, start);
-		token_creator(input, tokens, 1);
+		// if () // >> <<
+		// 	token_creator(input, tokens, 1);
+		// else
+			token_creator(input, tokens, 1);
 		return (1);
 	}
 	return (0);
