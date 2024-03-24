@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   3_cleaner.c                                        :+:      :+:    :+:   */
+/*   3_lexical_checker.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 20:41:01 by mchampag          #+#    #+#             */
-/*   Updated: 2024/03/20 21:44:38 by mchampag         ###   ########.fr       */
+/*   Updated: 2024/03/23 21:10:47 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-bool	exit_cleaner(t_mini *mini, t_list **tokens)
+static bool	exit_checker(t_mini *mini, t_list **tokens)
 {
 	mini->lastexitstatus = SYNTAX;
 	printf("syntax error\n");
@@ -32,7 +32,7 @@ static bool	handle_redirection(t_mini *mini, t_list **tokens, t_list **ptr)
 	if (opposite[0] == '<' || opposite[0] == '>')
 	{
 		if ((*ptr)->next == NULL || ft_strcmp((*ptr)->next->content, opposite))
-			return (exit_cleaner(mini, tokens));
+			return (exit_checker(mini, tokens));
 		if (ft_strcmp((*ptr)->next->content, (*ptr)->content))
 		{
 			if (ft_strappend((char **)&(*ptr)->content, (*ptr)->content))
@@ -43,7 +43,7 @@ static bool	handle_redirection(t_mini *mini, t_list **tokens, t_list **ptr)
 		{
 			if ((*ptr)->next == NULL || ft_strcmp((*ptr)->next->content, "<")
 				|| ft_strcmp((*ptr)->next->content, ">"))
-				return (exit_cleaner(mini, tokens));
+				return (exit_checker(mini, tokens));
 		}
 		*ptr = (*ptr)->next;
 	}
@@ -75,18 +75,18 @@ static bool	handle_space(t_list **tokens, t_list *ptr)
 }
 
 // refaire conditions pour qu'elles fit
-bool	token_cleaner(t_mini *mini, t_list **tokens)
+bool	lexical_checker(t_mini *mini, t_list **tokens)
 {
 	t_list	*ptr;
 
 	ptr = *tokens;
 	while (ptr)
 	{
-		// printf("ptr : %s\n", (char *)ptr->content);
+		// printf("ptr_lc : %s\n", (char *)ptr->content);
 		if (handle_space(tokens, ptr))
 			ptr = *tokens;
 		else if (handle_pipe(ptr))
-			return (exit_cleaner(mini, tokens));
+			return (exit_checker(mini, tokens));
 		else if (handle_redirection(mini, tokens, &ptr))
 			return (EXIT_FAILURE);
 		else

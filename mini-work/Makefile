@@ -6,7 +6,7 @@
 #    By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/05 12:35:03 by adube             #+#    #+#              #
-#    Updated: 2024/03/17 23:01:13 by mchampag         ###   ########.fr        #
+#    Updated: 2024/03/23 20:50:09 by mchampag         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,10 +28,10 @@ SRCS_LST	=	main.c \
 				builtins/unset.c \
 				builtins/utils_1.c \
 				builtins/utils_2.c \
-				lexer/1_lexer.c \
-				lexer/2_tokenizer.c \
-				lexer/3_cleaner.c \
-				lexer/4_expander.c \
+				1_lexer/1_lexer.c \
+				1_lexer/2_tokenizer.c \
+				1_lexer/3_lexical_checker.c \
+				1_lexer/4_command_creator.c \
 				parsing/parse_builtins.c \
 				parsing/parse_paths.c \
 				parsing/parse.c \
@@ -76,7 +76,7 @@ run: 	all
 		@./$(NAME)
 
 dir :
-		@mkdir -p $(OBJS_DIR) $(OBJS_DIR)lexer $(OBJS_DIR)parsing $(OBJS_DIR)builtins $(OBJS_DIR)pipex $(OBJS_DIR)utils
+		@mkdir -p $(OBJS_DIR) $(OBJS_DIR)1_lexer $(OBJS_DIR)parsing $(OBJS_DIR)builtins $(OBJS_DIR)pipex $(OBJS_DIR)utils
 		@mkdir -p $(LIBRLINE_DIR)
 
 readline :
@@ -115,7 +115,7 @@ readline :
 	
 clean:
 				@make -C $(LIBFT_DIR) clean
-				@$(RM) $(OBJS_DIR) $(OBJS_DIR)lexer $(OBJS_DIR)parsing $(OBJS_DIR)builtins $(OBJS_DIR)pipex $(OBJS_DIR)utils
+				@$(RM) $(OBJS_DIR) $(OBJS_DIR)1_lexer $(OBJS_DIR)parsing $(OBJS_DIR)builtins $(OBJS_DIR)pipex $(OBJS_DIR)utils
 				@echo -e "object deleted!"
 
 fclean:			clean

@@ -6,7 +6,7 @@
 /*   By: mchampag <mchampag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:57:36 by adube             #+#    #+#             */
-/*   Updated: 2024/03/17 22:36:39 by mchampag         ###   ########.fr       */
+/*   Updated: 2024/03/23 21:03:52 by mchampag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@
 # define UNSET 16
 # define PIPE 127
 # define SYNTAX 2
+# define LESS '<'
+# define GREATER '>'
+
+//SHELLNAME
+# define SHELL "minishell"
 
 # define NON  "\x1B[0m"
 # define RED  "\x1B[31m"
@@ -64,6 +69,11 @@
 
 int		ERROR;
 
+
+// OUT: >
+// IN: <
+// APPEND: >>
+// HERE: <<
 typedef enum e_toktype
 {
 	TOK_REDIR_INPUT,
@@ -106,6 +116,31 @@ typedef struct s_mini
 	int				lastexitstatus;
 }				t_mini;
 
+
+// operator: redirectionoperator
+// filename resp. HERELIMITER
+typedef struct s_re
+{
+	int			operator;
+	char		*file;
+	int			herepipe[2];
+	struct s_re	*next;
+}	t_re;
+
+// path: command(name) / relative path to command / absolute path to command
+// args: args[0] is the command(name)
+// fd[0] in fd[1] out
+typedef struct s_cmd
+{
+	char			*path;
+	char			**args;
+	bool			hasheredoc;
+	bool			isbuiltin;
+	t_re			*re;
+	int				pid;
+	int				fd[2];
+}	t_cmd;
+
 /* BUILTINS */
 int		cd(t_env *env, char **args);
 void	ft_echo(char **args);
@@ -135,11 +170,10 @@ void	exec_builtin(t_mini *mini, t_env *env, char **args, int cmd);
 char	*quote_checker(char quote_type, char *arg);
 
 /* CLEANER */ 
-bool	exit_cleaner(t_mini *mini, t_list **tokens);
-bool	token_cleaner(t_mini *mini, t_list **tokens);
+bool	lexical_checker(t_mini *mini, t_list **tokens);
 
-/* CLEANER_UTILS */
-
+/* CLEANER_2 */
+char	**command_creator(t_list **tokens);
 
 /* path_cmds */
 char	*find_cmd(char *cmd, t_env *env);
